@@ -38,11 +38,108 @@ const Routers = function ({ history, app }) {
             }, 'login')
           },
         }, {
-          path: 'merchant/info',
+          path: 'merchantInfo',
           getComponent (nextState, cb) {
             require.ensure([], require => {
+              registerModel(app, require('./models/merchantInfo'))
               cb(null, require('./routes/merchant/info/'))
-            }, 'merchant-info')
+            }, 'merchantInfo')
+          },
+        }, {
+          path: 'merchantBank',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/merchantBank'))
+              cb(null, require('./routes/merchant/bank/'))
+            }, 'merchantBank')
+          },
+        }, {
+          path: 'merchantKey',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/merchantKey'))
+              cb(null, require('./routes/merchant/key/'))
+            }, 'merchantKey')
+          },
+        }, {
+          path: 'merchantRate',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/merchantRate'))
+              cb(null, require('./routes/merchant/rate/'))
+            }, 'merchantRate')
+          },
+        }, {
+          path: 'payOrder',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/payOrder'))
+              cb(null, require('./routes/pay/order/'))
+            }, 'payOrder')
+          },
+        }, {
+          path: 'withdrawOrder',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/withdrawOrder'))
+              cb(null, require('./routes/withdraw/order/'))
+            }, 'withdrawOrder')
+          },
+        }, {
+          path: 'notWithdrawOrder',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/notWithdrawOrder'))
+              cb(null, require('./routes/withdraw/notOrder/'))
+            }, 'notWithdrawOrder')
+          },
+        }, {
+          path: 'remit',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/remit'))
+              cb(null, require('./routes/withdraw/remit/'))
+            }, 'notWithdrawOrder')
+          },
+        }, {
+          path: 'flowUser',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/flowUser'))
+              cb(null, require('./routes/flow/user/'))
+            }, 'flowUser')
+          },
+        }, {
+          path: 'flowFinance',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/flowFinance'))
+              cb(null, require('./routes/flow/finance/'))
+            }, 'flowFinance')
+          },
+        }, {
+          path: 'flowFinanceOrder',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/flowFinanceOrder'))
+              cb(null, require('./routes/flow/financeOrder/'))
+            }, 'flowFinanceOrder')
+          },
+        }, {
+          path: 'flowOrder',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/flowOrder'))
+              cb(null, require('./routes/flow/order/'))
+            }, 'flowOrder')
+          },
+        }, {
+          path: 'cashierInfo',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/cashierInfo'))
+              cb(null, require('./routes/cashier/info/'))
+            }, 'cashierInfo')
           },
         }, {
           path: '*',

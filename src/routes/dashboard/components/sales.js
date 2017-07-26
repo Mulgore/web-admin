@@ -8,7 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 function Sales ({ data }) {
   return (
     <div className={styles.sales}>
-      <div className={styles.title}>Yearly Sales</div>
+      <div className={styles.title}>交易趋势</div>
       <ResponsiveContainer minHeight={360}>
         <LineChart data={data}>
           <Legend verticalAlign="top"
@@ -29,9 +29,8 @@ function Sales ({ data }) {
               return <div className={styles.tooltip}><p className={styles.tiptitle}>{content.label}</p><ul>{list}</ul></div>
             }}
           />
-          <Line type="monotone" dataKey="Food" stroke={color.purple} strokeWidth={3} dot={{ fill: color.purple }} activeDot={{ r: 5, strokeWidth: 0 }} />
-          <Line type="monotone" dataKey="Clothes" stroke={color.red} strokeWidth={3} dot={{ fill: color.red }} activeDot={{ r: 5, strokeWidth: 0 }} />
-          <Line type="monotone" dataKey="Electronics" stroke={color.green} strokeWidth={3} dot={{ fill: color.green }} activeDot={{ r: 5, strokeWidth: 0 }} />
+          <Line type="monotone" dataKey="Amount" stroke={color.purple} strokeWidth={3} dot={{ fill: color.purple }} activeDot={{ r: 5, strokeWidth: 0 }} />
+          <Line type="monotone" dataKey="Number" stroke={color.red} strokeWidth={3} dot={{ fill: color.red }} activeDot={{ r: 5, strokeWidth: 0 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>

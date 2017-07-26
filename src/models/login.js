@@ -18,7 +18,7 @@ export default {
       if (data.success) {
         const from = queryURL('from')
         yield put({ type: 'app/query' })
-        if (from) {
+        if (from !='/') {
           yield put(routerRedux.push(from))
         } else {
           yield put(routerRedux.push('/dashboard'))

@@ -4,34 +4,33 @@ const config = require('../utils/config')
 const { apiPrefix } = config
 
 const Dashboard = Mock.mock({
-  'sales|8': [
+  'sales|10': [
     {
       'name|+1': 2008,
-      'Clothes|200-500': 1,
-      'Food|180-400': 1,
-      'Electronics|300-550': 1,
+      'Amount|200-500': 1,
+      'Number|180-400': 1,
     },
   ],
   numbers: [
     {
       icon: 'pay-circle-o',
       color: color.green,
-      title: 'Online Review',
+      title: '交易额',
       number: 2781,
     }, {
-      icon: 'team',
+      icon: 'bell',
       color: color.blue,
-      title: 'New Customers',
+      title: '交易笔数',
       number: 3241,
     }, {
-      icon: 'message',
+      icon: 'bank',
       color: color.purple,
-      title: 'Active Projects',
+      title: '结算金额',
       number: 253,
     }, {
-      icon: 'shopping-cart',
+      icon: 'sync',
       color: color.red,
-      title: 'Referrals',
+      title: '退款笔数',
       number: 4324,
     },
   ],

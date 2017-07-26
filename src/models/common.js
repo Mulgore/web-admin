@@ -18,7 +18,7 @@ const pageModel = modelExtend(model, {
     pagination: {
       showSizeChanger: true,
       showQuickJumper: true,
-      showTotal: total => `Total ${total} Items`,
+      showTotal: total => `总共 ${total} 条`,
       current: 1,
       total: 0,
     },

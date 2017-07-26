@@ -1,136 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b8b6284-1bb1-4c3a-b702-d32c7052f13e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/4.2.1-demo-1.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/4.2.1-demo-2.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/dashboard.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/antd/iconfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/antd/iconfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/antd/iconfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/iconfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/iconfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/iconfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.editorconfig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.eslintignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.eslintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.roadhogrc.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.roadhogrc.mock.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/standard.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/antd/iconfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/iconfont.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/iconfont.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/iconfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DataTable/AnimTableBody.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DataTable/DataTable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DataTable/DataTable.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DataTable/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DropOption/DropOption.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DropOption/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Editor/Editor.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Editor/Editor.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Editor/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FilterItem/FilterItem.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FilterItem/FilterItem.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FilterItem/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Iconfont/Iconfont.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Iconfont/iconfont.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Iconfont/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Bread.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Bread.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Footer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Footer.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Header.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Header.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Layout.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Menu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Sider.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/Sider.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Layout/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Loader/Loader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Loader/Loader.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Loader/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Search/Search.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Search/Search.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Search/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/layer/layer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/layer/layer.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/layer/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mock/common.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mock/dashboard.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mock/menu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mock/user.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/common.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/dashboard.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/router.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/app.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/components/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/components/numberCard.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/components/numberCard.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/components/sales.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/components/sales.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/dashboard/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/error/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/error/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/login/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/login/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/merchant/info/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/post/List.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/post/List.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/post/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/Filter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/List.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/List.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/Modal.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/detail/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/detail/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/routes/user/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/services/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/services/dashboard.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/services/menus.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/congratulations.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/cry.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/kiss.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/leisurely.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/notice.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/proud.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/shy.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/sweat.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/cute/think.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/smirking.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/surprised.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/tired.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/tongue.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/unamused.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/vomiting.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/wink.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/svg/emoji/zombie.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/models/example-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/themes/default.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/themes/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/themes/mixin.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/themes/vars.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/enums.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/request.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/theme.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/theme.config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-    </list>
+    <list default="true" id="5b8b6284-1bb1-4c3a-b702-d32c7052f13e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -196,24 +67,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dva-ant-admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dva-ant-admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -251,30 +108,31 @@
       <option name="presentableId" value="Default" />
       <updated>1500514312637</updated>
       <workItem from="1500514314102" duration="490000" />
+      <workItem from="1501077596748" duration="74000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490000" />
+    <option name="totallyTimeSpent" value="564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="972" extended-state="6" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24954791" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -294,7 +152,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -305,7 +162,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="15">
             <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -315,7 +171,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

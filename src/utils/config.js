@@ -2,9 +2,9 @@ const APIV1 = '/api/v1'
 const APIV2 = '/api/v2'
 
 module.exports = {
-  name: '管理后台',
+  name: '  商户管理后台',
   prefix: 'antdAdmin',
-  footerText: '管理后台  © 2017',
+  footerText: '付啦商户管理后台  © 2017',
   logo: '/logo.png',
   iconFontCSS: '/iconfont.css',
   iconFontJS: '/iconfont.js',
@@ -21,7 +21,18 @@ module.exports = {
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
     menus: `${APIV1}/menus`,
-    v1test: `${APIV1}/test`,
-    v2test: `${APIV2}/test`,
+    merchantInfo: `${APIV1}/merchantInfo`,
+    merchantKey: `${APIV1}/merchantKey`,
+    merchantBank: `${APIV1}/merchantBank`,
+    merchantRate:`${APIV1}/merchantRate`,
+    payOrder: `${APIV1}/payOrder`,
+    withdrawOrder: `${APIV1}/withdrawOrder`,
+    notWithdrawOrder: `${APIV1}/notWithdrawOrder`,
+    remit: `${APIV1}/remit/:id`,
+    flowUser: `${APIV1}/flowUser`,
+    flowFinance:  `${APIV1}/flowFinance`,
+    flowFinanceOrder: `${APIV1}/flowFinanceOrder`,
+    flowOrder: `${APIV1}/flowOrder`,
+    cashierInfo:`${APIV1}/cashierInfo`,
   },
 }
