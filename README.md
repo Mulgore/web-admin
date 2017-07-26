@@ -8,6 +8,11 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/zuiidea/antd-admin/pulls)
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+## 说明
+
+-  作为一名JAVA后端开发者接触前段这一块从开始的懵逼，到现在的觉得越来越有意思，本人比较喜欢bootstrap风格的后台，写得不好的地方希望大家能够提建议
+-  感谢[zuiidea](https://github.com/zuiidea/antd-admin)大哥的这个开源项目，本项目也是借鉴他的项目进行二次开发的，再次感谢！
+-  [ant-design](https://github.com/ant-design/ant-design)这个阿里的框架确实不错，希望我的这个项目能够帮助更多的人学习这个框架
 
 ## 特性
 
