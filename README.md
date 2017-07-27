@@ -61,11 +61,7 @@
 
 克隆项目文件:
 
-<<<<<<< HEAD
-    git clone https://github.com/zuiidea/antd-admin.git
-=======
     git clone https://github.com/Mulgore/dva-ant-admin
->>>>>>> 797fe3121eb0d5a6f4693e676a350e1112d73ddb
 
 进入目录安装依赖:
 
