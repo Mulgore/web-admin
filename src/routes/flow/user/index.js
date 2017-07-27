@@ -4,10 +4,19 @@ import { connect } from 'dva'
 import { Info } from './components'
 
 
-const UserView = ({ flowUser }) => {
+const UserView = ({ flowUser, dispatch }) => {
   const { info } = flowUser
+  const modalProps = ({
+    info:info,
+    onOk (data) {
+      dispatch({
+        type: `flowUser/recharge`,
+        payload: data,
+      })
+    },
+  })
   return (<div className="content-inner">
-    <Info {...info} />
+    <Info {...modalProps} />
   </div>)
 }
 

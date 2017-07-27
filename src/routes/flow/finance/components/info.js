@@ -50,10 +50,11 @@ const Info = ({
       },
     },
   };
+  const payType = '21';
 
   return (<Form>
-    <FormItem {...formItemLayout} label="账户余额" hasFeedback>
-      <label style={{color: 'red'}}>&nbsp;&nbsp;{amount} 元</label>
+    <FormItem {...formItemLayout} label="账户余额">
+      <label style={{color: 'red'}}>{amount} 元</label>
     </FormItem>
     <FormItem {...formItemLayout} label="账户">
       {getFieldDecorator('userId', {initialValue: userId})(
@@ -87,7 +88,7 @@ const Info = ({
                       placeholder="请输入金额(5-50000)"></InputNumber>)}
     </FormItem>
     <FormItem {...formItemLayout} label="支付方式" hasFeedback>
-      {getFieldDecorator('payType',{
+      {getFieldDecorator('payType',{initialValue: payType,
         rules: [
           {
             required: true,
@@ -102,7 +103,7 @@ const Info = ({
         </RadioGroup>
       )}
     </FormItem>
-    <FormItem {...tailFormItemLayout} hasFeedback>
+    <FormItem {...tailFormItemLayout}>
       <Button type='primary' onClick={handleOk}>立即充值</Button>
     </FormItem>
   </Form>)

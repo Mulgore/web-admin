@@ -6,10 +6,9 @@ import List from './List'
 import Modal from './Modal'
 import {Button, Row, Col} from 'antd'
 
-const Index = ({remit, dispatch, loading, location}) => {
+const Index = ({ remit, dispatch, loading, location }) => {
   const {list, pagination, currentItem, modalVisible, modalType} = remit
-  const { query = {}, pathname } = location
-  const { pageSize } = pagination
+  const { query, pathname } = location
   const modalProps = {
     item: modalType === 'autoAll' ? {} : currentItem,
     visible: modalVisible,
@@ -32,17 +31,16 @@ const Index = ({remit, dispatch, loading, location}) => {
   }
 
   const listProps = {
+    pagination,
     dataSource: list,
     loading: loading.effects['remit/query'],
-    pagination,
-    location,
-    onChange () {
+    onChange (page) {
       dispatch(routerRedux.push({
         pathname,
         query: {
           ...query,
-          page: 1,
-          pageSize
+          page: page.current,
+          pageSize: page.pageSize,
         },
       }))
     },

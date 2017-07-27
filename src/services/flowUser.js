@@ -9,3 +9,10 @@ export async function query (params) {
     data: params,
   })
 }
+export async function recharge (params) {
+  return request({
+    url: flowUser,
+    method: 'post',
+    data: params,
+  })
+}

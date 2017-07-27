@@ -2,8 +2,11 @@ import { query, recharge } from '../services/flowFinance';
 
 export default {
   namespace: 'flowFinance',
+
   state: {
     info:{},
+    modalVisible: false,
+    modalType: 'flowAll',
   },
   reducers: {
     querySuccess (state, { payload }) {
@@ -12,6 +15,14 @@ export default {
         ...state,
         ...data,
       }
+    },
+
+    showModal(state, {payload}){
+      return {...state, ...payload, modalVisible: true}
+    },
+
+    hideModal(state){
+      return {...state, modalVisible: false}
     },
   },
   effects: {
@@ -30,12 +41,14 @@ export default {
     *recharge ({ payload }, { call, put }) {
       const data = yield call(recharge, payload)
       if (data.success) {
-        yield put({ type: 'query'})
+        yield put({ type: 'query', payload: data})
+        yield put({type: 'showModal',payload: data})
       }else {
         throw data
       }
     },
   },
+
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(location => {

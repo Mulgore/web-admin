@@ -15,6 +15,7 @@ module.exports = {
 
   [`GET ${apiPrefix}/remit`] (req, res) {
     const { query } = req
+    console.log(query)
     let { pageSize, page, ...other } = query
     pageSize = pageSize || 10
     page = page || 1

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table, Button } from 'antd'
 import PropTypes from 'prop-types'
+import AnimTableBody from '../../../components/DataTable/AnimTableBody'
 import styles from './List.less'
 
 const status = (key) => {
@@ -58,7 +59,7 @@ const payType = (key) => {
 
 const List = ({ onEditItem, ...tableProps }) => {
 
-  const onChangeAuto = (record)=>{
+ const onChangeAuto = (record)=>{
     onEditItem(record)
   }
 
@@ -104,7 +105,6 @@ const List = ({ onEditItem, ...tableProps }) => {
 
 List.propTypes = {
   onEditItem: PropTypes.func,
-  location: PropTypes.object,
 }
 
 export default List

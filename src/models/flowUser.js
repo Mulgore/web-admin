@@ -1,4 +1,4 @@
-import { query } from '../services/flowUser';
+import { query, recharge } from '../services/flowUser';
 
 export default {
   namespace: 'flowUser',
@@ -24,6 +24,19 @@ export default {
             data,
           },
         })
+      }
+    },
+    *recharge ({ payload }, { call, put }) {
+      const data = yield call(recharge, payload)
+      console.log(data)
+      if (data.success) {
+        yield put({ type: 'query',
+          payload: {
+          data,
+        },
+        })
+      }else {
+        throw data
       }
     },
   },

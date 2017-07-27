@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'dva'
-import { Info } from './components'
+import { Info, Modal } from './components'
 
 
 function FinanceView ({ flowFinance, dispatch }) {
-  const { info } = flowFinance
+  const { info, modalVisible, pay } = flowFinance
   const modalProps = ({
     info:info,
     onOk (data) {
@@ -15,8 +15,22 @@ function FinanceView ({ flowFinance, dispatch }) {
       })
     },
   })
+  const modalQRCodeProps = ({
+    payValue: pay,
+    visible: modalVisible,
+    maskClosable: false,
+    title: `扫码支付`,
+    wrapClassName: 'vertical-center-modal',
+    footer:null,
+    onCancel () {
+      dispatch({
+        type: 'flowFinance/hideModal',
+      })
+    },
+  })
   return (<div className="content-inner">
     <Info {...modalProps} />
+    {modalVisible && <Modal {...modalQRCodeProps} />}
   </div>)
 }
 

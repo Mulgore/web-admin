@@ -4,7 +4,7 @@ const {apiPrefix} = config
 
 const Info = Mock.mock({
   'info': {
-    'amount': '612371',
+    'amount': 10,
     'userId': '10712312312',
     'permission': '审核中',
     'sales': '94折',
@@ -20,5 +20,9 @@ const Info = Mock.mock({
 module.exports = {
   [`GET ${apiPrefix}/flowUser`] (req, res) {
     res.json(Info)
+  },
+  [`POST ${apiPrefix}/flowUser`] (req, res) {
+    Info.info.amount -= 100
+    res.status(200).end()
   },
 }

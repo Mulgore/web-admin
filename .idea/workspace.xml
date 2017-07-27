@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b8b6284-1bb1-4c3a-b702-d32c7052f13e" name="Default" comment="" />
+    <list default="true" id="5b8b6284-1bb1-4c3a-b702-d32c7052f13e" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/routes/cashier/info/components/rate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/routes/flow/user/components/rate.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mock/flowFinance.js" afterPath="$PROJECT_DIR$/src/mock/flowFinance.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mock/flowUser.js" afterPath="$PROJECT_DIR$/src/mock/flowUser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mock/remit.js" afterPath="$PROJECT_DIR$/src/mock/remit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/flowFinance.js" afterPath="$PROJECT_DIR$/src/models/flowFinance.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/flowFinanceOrder.js" afterPath="$PROJECT_DIR$/src/models/flowFinanceOrder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/flowUser.js" afterPath="$PROJECT_DIR$/src/models/flowUser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/login.js" afterPath="$PROJECT_DIR$/src/models/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/merchantRate.js" afterPath="$PROJECT_DIR$/src/models/merchantRate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/notWithdrawOrder.js" afterPath="$PROJECT_DIR$/src/models/notWithdrawOrder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/payOrder.js" afterPath="$PROJECT_DIR$/src/models/payOrder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/remit.js" afterPath="$PROJECT_DIR$/src/models/remit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/flow/finance/components/index.js" afterPath="$PROJECT_DIR$/src/routes/flow/finance/components/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/flow/finance/components/info.js" afterPath="$PROJECT_DIR$/src/routes/flow/finance/components/info.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/flow/finance/index.js" afterPath="$PROJECT_DIR$/src/routes/flow/finance/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/flow/user/components/info.js" afterPath="$PROJECT_DIR$/src/routes/flow/user/components/info.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/flow/user/index.js" afterPath="$PROJECT_DIR$/src/routes/flow/user/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/withdraw/remit/List.js" afterPath="$PROJECT_DIR$/src/routes/withdraw/remit/List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/withdraw/remit/index.js" afterPath="$PROJECT_DIR$/src/routes/withdraw/remit/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/services/flowUser.js" afterPath="$PROJECT_DIR$/src/services/flowUser.js" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -55,6 +79,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -69,8 +95,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -97,6 +121,28 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="npm.run">
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="run" type="js.build_tools.npm" factoryName="npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="npm.run" />
+    </list>
+  </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
@@ -109,11 +155,12 @@
       <updated>1500514312637</updated>
       <workItem from="1500514314102" duration="490000" />
       <workItem from="1501077596748" duration="74000" />
+      <workItem from="1501143872969" duration="516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="564000" />
+    <option name="totallyTimeSpent" value="1080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="972" extended-state="6" />
@@ -121,7 +168,7 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24954791" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290398" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />

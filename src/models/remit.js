@@ -11,7 +11,7 @@ export default modelExtend(pageModel, {
     currentItem: {},
     modalVisible: false,
     modalType: 'autoAll',
-    isMotion: localStorage.getItem(`${prefix}remitIsMotion`) === 'true',
+    isMotion: localStorage.getItem(`${prefix}userIsMotion`) === 'true',
   },
 
   subscriptions: {
@@ -28,9 +28,7 @@ export default modelExtend(pageModel, {
   },
 
   effects: {
-    *query ({
-              payload,
-            }, {call, put}) {
+    *query ({ payload = {} }, {call, put}) {
       const data = yield call(query, payload)
       if (data.success) {
         yield put({

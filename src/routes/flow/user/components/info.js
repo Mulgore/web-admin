@@ -1,36 +1,68 @@
 import React from 'react'
 import {layer} from 'components'
 import PropTypes from 'prop-types'
-import {Col, Row, Button, Form, Input, Radio} from 'antd'
+import {Button, Form, Input, Radio} from 'antd'
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 const FormItem = Form.Item
 
+const hasErrors = (amount)=>{
+  if (amount == ''){
+    return 'disabled'
+  }
+  if (amount == null){
+    return 'disabled'
+  }
+  if (amount <= 0){
+    return 'disabled'
+  }
+  return ''
+}
+
 const Info = ({
-                amount,
-                sales,
+                info,
+                onOk,
                 form: {
                   getFieldDecorator,
                   getFieldsValue,
-                  setFieldsValue,
+                  validateFields,
                 },
-                userId,
-                permission,
-                yDX= [],
-                yLT= [],
-                yYD= [],
-                nDX= [],
-                nLT= [],
-                nYD= [],
+
               }) => {
-  const Layout = {
+  const {amount, sales, permission, userId,  yDX = [], yLT = [], yYD = [], nDX = [], nLT = [], nYD = []} = info
+
+  const handleOk = () => {
+    validateFields((errors) => {
+      if (errors) {
+        return
+      }
+      const data = {
+        ...getFieldsValue(),
+      }
+      onOk(data)
+    })
+  }
+
+  const formItemLayout = {
     labelCol: {
-      xs: {label: 24},
-      sm: {label: 8},
+      xs: {span: 24},
+      sm: {span: 6},
     },
     wrapperCol: {
-      xs: {label: 24},
-      sm: {label: 16},
+      xs: {span: 24},
+      sm: {span: 14},
+    },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 14,
+        offset: 6,
+      },
     },
   };
   const Arr = (flows) => {
@@ -43,120 +75,112 @@ const Info = ({
   const mobile = '';
   const payType = '21';
 
-  const handleFields = (fields) => {
-    const {mobile, payType} = fields
-    console.log(fields)
-    if (mobile.length) {
-    }
-    if (payType) {
-    }
-    return fields
-  }
-
-  const handleChange = (key, values) => {
-    let fields = getFieldsValue()
-    fields = handleFields(fields)
-  }
-
   return (<Form>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={10} offset={2}>
-          <label>账户余额:&nbsp;&nbsp;</label>
-          <label style={{color: 'red'}}>{amount} 元</label>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="账户余额">
+      <label style={{color: 'red'}}>{amount} 元</label>
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={12} offset={2}>
-          <label>充值号码:&nbsp;&nbsp;</label>
-          {getFieldDecorator('mobile', {initialValue: mobile})(<Input size="large" style={{width: '150px'}}
-                                                                      onBlur={handleChange.bind(null, 'mobile')}
-                                                                      placeholder="请输入充值手机号"></Input>)}
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="充值号码" hasFeedback>
+      {getFieldDecorator('mobile', {
+        initialValue: mobile,
+        rules: [
+          {
+            required: true,
+            pattern: /^1[34578]\d{9}$/,
+            message: '请输入正确的电话号码!',
+          },
+        ],
+      })(<Input size="large" style={{width: '150px'}} placeholder="请输入充值手机号"></Input>)}
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={12} offset={2}>
-          <label>支付方式:&nbsp;&nbsp;</label>
-          {getFieldDecorator('payType', {initialValue: payType})(<RadioGroup size="large">
-            <RadioButton value="21">微信支付</RadioButton>
-            <RadioButton value="41">支付宝</RadioButton>
-            <RadioButton value="11" disabled>银行卡</RadioButton>
-          </RadioGroup>)}
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="支付方式" hasFeedback>
+      {getFieldDecorator('payType', {
+        initialValue: payType,
+        rules: [
+          {
+            required: true,
+            message: '请选择支付方式!',
+          },
+        ],
+      })(<RadioGroup size="large">
+        <RadioButton value="21">微信支付</RadioButton>
+        <RadioButton value="41">支付宝</RadioButton>
+        <RadioButton value="11" disabled>银行卡</RadioButton>
+      </RadioGroup>)}
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={8} offset={2}>
-          <label>全国流量:&nbsp;&nbsp;</label>
-        </Col>
-        <Col span={8} offset={1}>
-          <label>省内流量:&nbsp;&nbsp;</label>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="全国流量">
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col className="gutter-row" span={8} offset={2}>
-          <label>移动:&nbsp;&nbsp;</label>
-          {getFieldDecorator('pay')(Arr(yYD))}
-          <div style={{marginTop: 16}}>
-            <label>联通:&nbsp;&nbsp;</label>
-            {getFieldDecorator('pay')(Arr(yLT))}
-          </div>
-          <div style={{marginTop: 16}}>
-            <label>电信:&nbsp;&nbsp;</label>
-            {getFieldDecorator('pay')(Arr(yDX))}
-          </div>
-        </Col>
-        <Col className="gutter-row" span={8} offset={1}>
-          <label>移动:&nbsp;&nbsp;</label>
-          {getFieldDecorator('pay')(Arr(nYD))}
-          <div style={{marginTop: 16}}>
-            <label>联通:&nbsp;&nbsp;</label>
-            {getFieldDecorator('pay')(Arr(nLT))}
-          </div>
-          <div style={{marginTop: 16}}>
-            <label>电信:&nbsp;&nbsp;</label>
-            {getFieldDecorator('pay')(Arr(nDX))}
-          </div>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="移动" hasFeedback>
+      {getFieldDecorator('pay', {
+        rules: [
+          {
+            required: true,
+            message: '请选择充值流量!',
+          },
+        ]
+      })(Arr(yYD))}
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={10} offset={3}>
-          <Button type='primary'>立即充值</Button>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="联通" hasFeedback>
+      {getFieldDecorator('pay',{
+        rules: [
+          {
+            required: true,
+            message: '请选择充值流量!',
+          },
+        ]
+      })(Arr(yLT))}
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={10} offset={2}>
-          <label>账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户:&nbsp;&nbsp;</label>
-          <label>{userId}</label>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="电信" hasFeedback>
+      {getFieldDecorator('pay',{
+        rules: [
+          {
+            required: true,
+            message: '请选择充值流量!',
+          },
+        ]
+      })(Arr(yDX))}
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={10} offset={2}>
-          <label>业务权限:&nbsp;&nbsp;</label>
-          <Button type='dashed'>{permission}</Button>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="省内流量">
     </FormItem>
-    <FormItem {...Layout}>
-      <Row>
-        <Col span={10} offset={2}>
-          <label>折&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扣:&nbsp;&nbsp;</label>
-          <label style={{color: 'red'}}>{sales}</label>
-        </Col>
-      </Row>
+    <FormItem {...formItemLayout} label="移动" hasFeedback>
+      {getFieldDecorator('pay',{
+        rules: [
+          {
+            required: true,
+            message: '请选择充值流量!',
+          },
+        ]
+      })(Arr(nYD))}
+    </FormItem>
+    <FormItem {...formItemLayout} label="联通" hasFeedback>
+      {getFieldDecorator('pay',{
+        rules: [
+          {
+            required: true,
+            message: '请选择充值流量!',
+          },
+        ]
+      })(Arr(nLT))}
+    </FormItem>
+    <FormItem {...formItemLayout} label="电信" hasFeedback>
+      {getFieldDecorator('pay',{
+        rules: [
+          {
+            required: true,
+            message: '请选择充值流量!',
+          },
+        ]
+      })(Arr(nDX))}
+    </FormItem>
+    <FormItem {...tailFormItemLayout}>
+      <Button type='primary' onClick={handleOk} disabled={hasErrors(amount)}>立即充值</Button>
+    </FormItem>
+    <FormItem {...formItemLayout} label="账户">
+      <label>{userId}</label>
+    </FormItem>
+    <FormItem {...formItemLayout} label="业务权限">
+      <Button type='dashed'>{permission}</Button>
+    </FormItem>
+    <FormItem {...formItemLayout} label="折扣">
+      <label style={{color: 'red'}}>{sales}</label>
     </FormItem>
 
   </Form>)
@@ -166,6 +190,7 @@ const Info = ({
 Info.propTypes = {
   amount: PropTypes.number,
   sales: PropTypes.string,
+  onOk: PropTypes.func,
   permission: PropTypes.string,
   userId: PropTypes.string,
   form: PropTypes.object,
