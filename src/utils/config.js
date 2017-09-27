@@ -2,9 +2,9 @@ const APIV1 = '/api/v1'
 const APIV2 = '/api/v2'
 
 module.exports = {
-  name: '  商户管理后台',
+  name: '  阅微管理后台',
   prefix: 'antdAdmin',
-  footerText: '付啦商户管理后台  © 2017',
+  footerText: '阅微管理后台  © 2017',
   logo: '/logo.png',
   iconFontCSS: '/iconfont.css',
   iconFontJS: '/iconfont.js',

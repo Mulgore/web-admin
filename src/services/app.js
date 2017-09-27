@@ -1,16 +1,17 @@
-import { request, config } from 'utils'
-const { api } = config
-const { user, userLogout, userLogin } = api
+import { request, config } from 'utils';
+import qs from 'qs'
+const { api } = config;
+const { user, userLogout, userLogin } = api;
 
-export async function login (params) {
+export async function login(params) {
   return request({
     url: userLogin,
     method: 'post',
-    data: params,
+    data: qs.stringify(params),
   })
 }
 
-export async function logout (params) {
+export async function logout(params) {
   return request({
     url: userLogout,
     method: 'get',
@@ -18,7 +19,7 @@ export async function logout (params) {
   })
 }
 
-export async function query (params) {
+export async function query(params) {
   return request({
     url: user.replace('/:id', ''),
     method: 'get',
