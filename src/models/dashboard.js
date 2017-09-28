@@ -1,6 +1,4 @@
-import { query } from '../services/dashboard'
-import { parse } from 'qs'
-
+import {query} from '../services/dashboard';
 
 export default {
   namespace: 'dashboard',
@@ -9,29 +7,19 @@ export default {
     numbers: [],
   },
   subscriptions: {
-    setup ({ dispatch }) {
-      dispatch({ type: 'query' })
-      dispatch({ type: 'queryWeather' })
+    setup({dispatch}) {
+      dispatch({type: 'query'})
     },
   },
   effects: {
-    *query ({
-      payload,
-    }, { call, put }) {
-      const data = yield call(query, parse(payload))
-      yield put({ type: 'queryWeather', payload: { ...data } })
-    },
-    *queryWeather ({
-      payload,
-    }, { call, put }) {
+    * query({payload}, {call, put}) {
+      const data = yield call(query, payload)
+      yield put({type: 'querySuccess', payload: {...data}})
     },
   },
   reducers: {
-    queryWeather (state, action) {
-      return {
-        ...state,
-        ...action.payload,
-      }
+    querySuccess(state, payload) {
+      return {...state, ...payload}
     },
   },
 }
