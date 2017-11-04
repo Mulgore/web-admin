@@ -24,6 +24,7 @@ const modal = ({
   },
   ...modalProps
 }) => {
+  const { balance } = item
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -36,28 +37,39 @@ const modal = ({
       onOk(data)
     })
   }
-
   const modalOpts = {
     ...modalProps,
     onOk: handleOk,
   }
 
+  const balanceTotal = () => {
+    if (balance != null){
+      return balance/100
+    }else {
+      return amountTotal
+    }
+  }
+  const FormItemById = () => {
+    if (balance != null){
+      return   <FormItem label="提现金额" hasFeedback {...formItemLayout}>
+        {getFieldDecorator('amount', {
+          rules: [
+            {
+              required: true,
+              message: '提现金额不能为空!',
+            },
+          ],
+        })(<InputNumber size="large" min={10} max={balance / 100} style={{ width: 200 }} placeholder="请输入金额"/>)}
+      </FormItem>
+    }
+  }
   return (
     <Modal {...modalOpts}>
       <Form layout="horizontal">
         <FormItem label="余额" hasFeedback {...formItemLayout}>
-          <label>{item.amount != null ? item.amount: amountTotal}元</label>
+          <label>{balanceTotal()}元</label>
         </FormItem>
-        <FormItem label="提现金额" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('amount', {
-            rules: [
-              {
-                required: true,
-                message: '提现金额不能为空!'
-              },
-            ],
-          })(<InputNumber size="large" min={1} max={item.amount != null ? item.amount: amountTotal} style={{width: 200}} placeholder="请输入金额"/>)}
-        </FormItem>
+        {FormItemById()}
       </Form>
     </Modal>
   )
@@ -66,6 +78,7 @@ const modal = ({
 modal.propTypes = {
   form: PropTypes.object.isRequired,
   item: PropTypes.object,
+  amountTotal: PropTypes.number,
   onOk: PropTypes.func,
 }
 

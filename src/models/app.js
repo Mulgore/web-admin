@@ -1,10 +1,12 @@
-import { query, logout } from '../services/app'
+import {query, logout, update} from '../services/app'
 import * as menusService from '../services/menus'
-import { routerRedux } from 'dva/router'
-import { parse } from 'qs'
+import {routerRedux} from 'dva/router'
+import {parse} from 'qs'
 import config from 'config'
-import { EnumRoleType } from 'enums'
-const { prefix } = config
+import {EnumRoleType} from 'enums'
+import {message} from 'antd'
+
+const {prefix} = config
 
 export default {
   namespace: 'app',
@@ -15,13 +17,14 @@ export default {
     },
     menu: [
       {
-        id: 1,
+        id: 0,
         icon: 'laptop',
-        name: '管理后台',
+        name: '管理中心',
         router: '/dashboard',
       },
     ],
     menuPopoverVisible: false,
+    modalVisible: false,
     siderFold: localStorage.getItem(`${prefix}siderFold`) === 'true',
     darkTheme: localStorage.getItem(`${prefix}darkTheme`) === 'true',
     isNavbar: document.body.clientWidth < 769,
@@ -29,13 +32,13 @@ export default {
   },
   subscriptions: {
 
-    setup ({ dispatch }) {
-      dispatch({ type: 'query' })
+    setup({dispatch}) {
+      dispatch({type: 'query'})
       let tid
       window.onresize = () => {
         clearTimeout(tid)
         tid = setTimeout(() => {
-          dispatch({ type: 'changeNavbar' })
+          dispatch({type: 'changeNavbar'})
         }, 300)
       }
     },
@@ -43,18 +46,18 @@ export default {
   },
   effects: {
 
-    *query ({
-      payload,
-    }, { call, put }) {
-      const { success, user } = yield call(query, payload)
+    * query({
+              payload,
+            }, {call, put}) {
+      const {success, user} = yield call(query, payload)
       if (success && user) {
-        const { list } = yield call(menusService.query)
-        const { permissions } = user
+        const {list} = yield call(menusService.query)
+        const {permissions} = user
         let menu = list
         if (permissions.role === EnumRoleType.ADMIN || permissions.role === EnumRoleType.DEVELOPER) {
           permissions.visit = list.map(item => item.id)
         } else {
-          menu = list.filter(item => {
+          menu = list.filter((item) => {
             const cases = [
               permissions.visit.includes(item.id),
               item.mpid ? permissions.visit.includes(item.mpid) || item.mpid === '-1' : true,
@@ -74,45 +77,51 @@ export default {
         if (location.pathname === '/login') {
           yield put(routerRedux.push('/dashboard'))
         }
-      } else {
-        if (config.openPages && config.openPages.indexOf(location.pathname) < 0) {
-          let from = location.pathname
-          window.location = `${location.origin}/login?from=${from}`
-        }
+      } else if (config.openPages && config.openPages.indexOf(location.pathname) < 0) {
+        let from = location.pathname
+        window.location = `${location.origin}/login?from=${from}`
       }
     },
 
-    *logout ({
-      payload,
-    }, { call, put }) {
+    * logout({
+               payload,
+             }, {call, put}) {
       const data = yield call(logout, parse(payload))
       if (data.success) {
-        yield put({ type: 'query' })
+        yield put({type: 'query'})
       } else {
         throw (data)
       }
     },
-
-    *changeNavbar ({
-      payload,
-    }, { put, select }) {
-      const { app } = yield(select(_ => _))
+    * update({payload}, {put, call}) {
+      const data = yield call(update, payload)
+      if (data.success) {
+        message.success(data.message)
+        yield put({type: 'hideModal'})
+      } else {
+        throw data
+      }
+    },
+    * changeNavbar({
+                     payload,
+                   }, {put, select}) {
+      const {app} = yield (select(_ => _))
       const isNavbar = document.body.clientWidth < 769
       if (isNavbar !== app.isNavbar) {
-        yield put({ type: 'handleNavbar', payload: isNavbar })
+        yield put({type: 'handleNavbar', payload: isNavbar})
       }
     },
 
   },
   reducers: {
-    updateState (state, { payload }) {
+    updateState(state, {payload}) {
       return {
         ...state,
         ...payload,
       }
     },
 
-    switchSider (state) {
+    switchSider(state) {
       localStorage.setItem(`${prefix}siderFold`, !state.siderFold)
       return {
         ...state,
@@ -120,7 +129,7 @@ export default {
       }
     },
 
-    switchTheme (state) {
+    switchTheme(state) {
       localStorage.setItem(`${prefix}darkTheme`, !state.darkTheme)
       return {
         ...state,
@@ -128,25 +137,34 @@ export default {
       }
     },
 
-    switchMenuPopver (state) {
+    switchMenuPopver(state) {
       return {
         ...state,
         menuPopoverVisible: !state.menuPopoverVisible,
       }
     },
 
-    handleNavbar (state, { payload }) {
+    handleNavbar(state, {payload}) {
       return {
         ...state,
         isNavbar: payload,
       }
     },
 
-    handleNavOpenKeys (state, { payload: navOpenKeys }) {
+    handleNavOpenKeys(state, {payload: navOpenKeys}) {
       return {
         ...state,
         ...navOpenKeys,
       }
     },
+
+    showModal(state, {payload}) {
+      return {...state, ...payload, modalVisible: true}
+    },
+
+    hideModal(state) {
+      return {...state, modalVisible: false}
+    },
+
   },
 }

@@ -28,12 +28,12 @@ const Bread = ({ menu }) => {
     pathArray.push(menu[0] || {
       id: 1,
       icon: 'laptop',
-      name: 'Dashboard',
+      name: '管理中心',
     })
-    pathArray.push({
-      id: 404,
-      name: 'Not Found',
-    })
+    // pathArray.push({
+    //   id: 404,
+    //   name: 'Not Found',
+    // })
   } else {
     getPathArray(current)
   }
@@ -42,14 +42,14 @@ const Bread = ({ menu }) => {
   const breads = pathArray.map((item, key) => {
     const content = (
       <span>{item.icon
-          ? <Icon type={item.icon} style={{ marginRight: 4 }} />
-          : ''}{item.name}</span>
+        ? <Icon type={item.icon} style={{ marginRight: 4 }} />
+        : ''}{item.name}</span>
     )
     return (
       <Breadcrumb.Item key={key}>
         {((pathArray.length - 1) !== key)
           ? <Link to={item.route}>
-              {content}
+            {content}
           </Link>
           : content}
       </Breadcrumb.Item>

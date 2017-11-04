@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
-import { FilterItem } from 'components'
-import { Form, Button, Row, Col, DatePicker, Input, Select } from 'antd'
-
-const { RangePicker } = DatePicker
-const Option = Select.Option;
+import {FilterItem} from 'components'
+import {Form, Button, Row, Col, Input, Select} from 'antd'
 
 const ColProps = {
   xs: 24,
@@ -65,36 +61,43 @@ const Filter = ({
 
   return (
     <Row gutter={24}>
-      <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-        {getFieldDecorator('orderId')(<Input placeholder="订单号" size="large"/>)}
+      <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{ span: 12 }}>
+        {getFieldDecorator('orderId')(<Input placeholder="订单号" onSelect={handleSubmit} size="large"/>)}
       </Col>
-      <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-        {getFieldDecorator('status')( <Select placeholder="请选择状态" size="large" filterOption={false} style={{ width: 200 }}>
+      <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{ span: 12 }}>
+        {getFieldDecorator('status')(<Select placeholder="请选择状态" size="large"
+                                             onChange={handleChange.bind(null, 'status')} filterOption={false}
+                                             style={{width: '100%'}}>
           <option value="0">未支付</option>
           <option value="1">支付成功</option>
           <option value="2">用户取消</option>
           <option value="3">交易关闭</option>
         </Select>)}
       </Col>
-      <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-        {getFieldDecorator('payType')( <Select placeholder="请选择支付类型" size="large" filterOption={false} style={{ width: 200 }}>
+      <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{ span: 12 }}>
+        {getFieldDecorator('payType')(<Select placeholder="请选择支付类型" size="large"
+                                              onChange={handleChange.bind(null, 'payType')} filterOption={false}
+                                              style={{width: '100%'}}>
           <option value="0">账户余额</option>
           <option value="21">微信二维码</option>
           <option value="41">支付宝二维码</option>
           <option value="10">银联快捷</option>
         </Select>)}
       </Col>
-      <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-        {getFieldDecorator('type')( <Select placeholder="请选择订单类型" size="large" filterOption={false} style={{ width: 200 }}>
+      <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{ span: 12 }}>
+        {getFieldDecorator('type')(<Select placeholder="请选择订单类型" size="large"
+                                           onChange={handleChange.bind(null, 'type')} filterOption={false}
+                                           style={{width: '100%'}}>
           <option value="1">充值</option>
           <option value="2">消费</option>
         </Select>)}
       </Col>
-      <Col {...TwoColProps} xl={{ span: 10 }} md={{ span: 24 }} sm={{ span: 24 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Col {...TwoColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <div >
-            <Button type="primary" size="large" className="margin-right" onClick={handleSubmit}>搜索</Button>
-            <Button size="large" onClick={handleReset}>重置</Button>
+            <Button type="primary" size="large" className="margin-right" icon="search"
+                    onClick={handleSubmit}>搜索</Button>
+            <Button size="large" icon="reload" onClick={handleReset}>重置</Button>
           </div>
         </div>
       </Col>

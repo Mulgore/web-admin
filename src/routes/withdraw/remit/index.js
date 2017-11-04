@@ -1,21 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'dva'
-import { routerRedux } from 'dva/router'
+import {routerRedux} from 'dva/router'
 import List from './List'
 import Modal from './Modal'
 import {Button, Row, Col} from 'antd'
 
-const Index = ({ remit, dispatch, loading, location }) => {
+const Index = ({remit, dispatch, loading, location}) => {
   const {list, pagination, currentItem, modalVisible, modalType} = remit
-  const { query, pathname } = location
+  const {query, pathname} = location
+  const {amountTotal} = pagination
   const modalProps = {
     item: modalType === 'autoAll' ? {} : currentItem,
     visible: modalVisible,
+    key: modalType === 'autoAll' ? 1 : 2,
     maskClosable: false,
     amountTotal: pagination.amountTotal,
-    confirmLoading: loading.effects['remit'],
-    title: `通道余额提现`,
+    confirmLoading: loading.effects.remit,
+    title: '通道余额提现',
     wrapClassName: 'vertical-center-modal',
     onOk (data) {
       dispatch({
@@ -57,7 +59,6 @@ const Index = ({ remit, dispatch, loading, location }) => {
 
 
   const onAutoSettle = () => {
-
     dispatch({
       type: 'remit/showModal',
       payload: {
@@ -65,11 +66,23 @@ const Index = ({ remit, dispatch, loading, location }) => {
       },
     })
   }
-
+  const hasErrors = (amountTotal) => {
+    if (amountTotal == '') {
+      return 'disabled'
+    }
+    if (amountTotal == null) {
+      return 'disabled'
+    }
+    if (amountTotal <= 0) {
+      return 'disabled'
+    }
+    return ''
+  }
   return (<div className="content-inner">
     <Row style={{marginBottom: 24, textAlign: 'right', fontSize: 13}}>
       <Col>
-        <Button type="primary" size="large" onClick={onAutoSettle} style={{marginLeft: 8}}>全部提现</Button>
+        <Button type="primary" size="large" icon="pay-circle-o" onClick={onAutoSettle} disabled={hasErrors(amountTotal)}
+                style={{marginLeft: 8}}>全部提现</Button>
       </Col>
     </Row>
     <List {...listProps} />

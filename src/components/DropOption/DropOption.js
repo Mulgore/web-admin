@@ -17,7 +17,7 @@ const DropOption = ({ onMenuClick, menuOptions = [], buttonStyle, dropdownProps 
 
 DropOption.propTypes = {
   onMenuClick: PropTypes.func,
-  menuOptions: PropTypes.array.isRequired,
+    menuOptions: PropTypes.array.isRequired,
   buttonStyle: PropTypes.object,
   dropdownProps: PropTypes.object,
 }

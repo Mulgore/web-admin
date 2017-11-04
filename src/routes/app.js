@@ -9,14 +9,17 @@ import '../themes/index.less'
 import './app.less'
 import NProgress from 'nprogress'
 import Error from './error'
+import Modal from './Modal'
+
 const { prefix, openPages } = config
 
 const { Header, Bread, Footer, Sider, styles } = Layout
 let lastHref
 
 const App = ({ children, dispatch, app, loading, location }) => {
-  const { user, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys, menu, permissions } = app
+  const { user, siderFold, darkTheme, isNavbar, menuPopoverVisible, modalVisible, navOpenKeys, menu, permissions } = app
   let { pathname } = location
+
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
   const { iconFontJS, iconFontCSS, logo } = config
   const current = menu.filter(item => pathToRegexp(item.route || '').exec(pathname))
@@ -43,6 +46,9 @@ const App = ({ children, dispatch, app, loading, location }) => {
     },
     logout () {
       dispatch({ type: 'app/logout' })
+    },
+    update () {
+      dispatch({ type: 'app/showModal' })
     },
     switchSider () {
       dispatch({ type: 'app/switchSider' })
@@ -75,13 +81,34 @@ const App = ({ children, dispatch, app, loading, location }) => {
       {children}
     </div>)
   }
+
+  const modalProps = {
+    visible: modalVisible,
+    maskClosable: false,
+    title: '修改密码',
+    wrapClassName: 'vertical-center-modal',
+    onOk(data) {
+      dispatch({
+        type: 'app/update',
+        payload: {
+          ...data,
+        },
+      })
+    },
+    onCancel() {
+      dispatch({
+        type: 'app/hideModal',
+      })
+    },
+  }
+
   return (
     <div>
       <Helmet>
         <title>管理后台</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href={logo} type="image/x-icon" />
-        {iconFontJS && <script src={iconFontJS}></script>}
+        {iconFontJS && <script src={iconFontJS} />}
         {iconFontCSS && <link rel="stylesheet" href={iconFontCSS} />}
       </Helmet>
       <div className={classnames(styles.layout, { [styles.fold]: isNavbar ? false : siderFold }, { [styles.withnavbar]: isNavbar })}>
@@ -93,12 +120,14 @@ const App = ({ children, dispatch, app, loading, location }) => {
           <Bread {...breadProps} />
           <div className={styles.container}>
             <div className={styles.content}>
-              {hasPermission ? children : <Error />}
+              {children}
+              {/*{hasPermission ? children : <Error />}*/}
             </div>
           </div>
           <Footer />
         </div>
       </div>
+      {modalVisible && <Modal {...modalProps} />}
     </div>
   )
 }

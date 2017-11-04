@@ -1,41 +1,42 @@
 import React from 'react'
-import {Table, Button} from 'antd'
+import { Table, label } from 'antd'
 import styles from './List.less'
+import { amountFormat } from '../../../utils'
 
 const status = (key) => {
   switch (key) {
     case 0:
-      return <Button style={{ color:'#f56a00' }} type="dashed">处理中</Button>
+      return <label  style={{ color: '#76d0a3' }} >处理中</label>
     case 1:
-      return <Button style={{ color:'#00a854' }} type="dashed">充值成功</Button>
+      return <label  style={{ color: '#7ec2f3' }} >充值成功</label>
     case 2:
-      return <Button style={{ color:'#f04134' }} type="dashed">充值失败</Button>
+      return <label  style={{ color: '#f79992' }} >充值失败</label>
     default:
-      return <Button type="danger">未知</Button>
+      return <label type="danger">未知</label>
   }
 }
 
 const flowCarrier = (key) => {
   switch (key) {
     case 'DX':
-      return <Button style={{ color:'#108ee9' }} type="dashed">中国电信</Button>
+      return <label style={{ color: '#7ec2f3' }} >中国电信</label>
     case 'YD':
-      return <Button style={{ color:'#00a854' }} type="dashed">中国移动</Button>
+      return <label  style={{ color: '#76d0a3' }} >中国移动</label>
     case 'LT':
-      return <Button style={{ color:'#f56a00' }} type="dashed">中国联通</Button>
+      return <label  style={{ color: '#faaf76' }} >中国联通</label>
     default:
-      return <Button type="danger">未知</Button>
+      return <label type="danger">未知</label>
   }
 }
 
 const flowType = (key) => {
   switch (key) {
     case 'y':
-      return <Button style={{ color:'#108ee9' }} type="dashed">全国</Button>
+      return <label  style={{ color: '#76cdd3' }} >全国</label>
     case 'n':
-      return <Button style={{ color:'#00a854' }} type="dashed">本地</Button>
+      return <label  style={{ color: '#b3acf2' }} >本地</label>
     default:
-      return <Button type="danger">未知</Button>
+      return <label type="danger">未知</label>
   }
 }
 
@@ -43,17 +44,13 @@ const flowType = (key) => {
 const role = (key) => {
   switch (key) {
     case 1:
-      return <Button style={{ color:'#108ee9' }} type="dashed">代理商</Button>
+      return <label  style={{ color: '#108ee9' }} >代理商</label>
     default:
-      return <Button style={{ color:'#00a854' }} type="dashed">商户</Button>
+      return <label  style={{ color: '#00a854' }} >商户</label>
   }
 }
 
-const amount = (key) => {
-  return key/100 +' 元'
-}
-
-const List = ({...tableProps}) => {
+const List = ({ ...tableProps }) => {
   const columns = [
     {
       title: '订单号',
@@ -73,22 +70,22 @@ const List = ({...tableProps}) => {
     }, {
       title: '用户角色',
       dataIndex: 'role',
-      render: (text) => role(text),
+      render: text => role(text),
     }, {
       title: '手机号',
       dataIndex: 'mobile',
     }, {
       title: '消费金额',
       dataIndex: 'amount',
-      render: (text) => amount(text),
+      render: text => amountFormat(text),
     }, {
       title: '运营商',
       dataIndex: 'flowCarrier',
-      render: (text) => flowCarrier(text),
+      render: text => flowCarrier(text),
     }, {
       title: '漫游类型',
       dataIndex: 'flowType',
-      render: (text) => flowType(text),
+      render: text => flowType(text),
     }, {
       title: 'M值',
       dataIndex: 'flowSize',
@@ -98,16 +95,18 @@ const List = ({...tableProps}) => {
     }, {
       title: '状态',
       dataIndex: 'status',
-      render: (text) => status(text),
+      render: text => status(text),
     }, {
       title: '订单描述',
       dataIndex: 'description',
     }, {
       title: '创建时间',
       dataIndex: 'createTime',
+      render: text => (text != null ? new Date(text).format('yyyy年MM月dd日 HH:mm:ss') : ''),
     }, {
       title: '修改时间',
       dataIndex: 'modifyTime',
+      render: text => (text != null ? new Date(text).format('yyyy年MM月dd日 HH:mm:ss') : ''),
     },
   ]
 
@@ -116,7 +115,7 @@ const List = ({...tableProps}) => {
       <Table
         {...tableProps}
         bordered
-        scroll={{x: 1200}}
+        scroll={{ x: 1200 }}
         columns={columns}
         simple
         className={styles.table}

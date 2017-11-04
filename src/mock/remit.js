@@ -6,11 +6,6 @@ let database = remit
 let amountTotal = 71283120
 
 
-const NOTFOUND = {
-  message: 'Not Found',
-  documentation_url: 'http://localhost:8000/',
-}
-
 module.exports = {
 
   [`GET ${apiPrefix}/remit`] (req, res) {
@@ -34,7 +29,7 @@ module.exports = {
     res.status(200).json({
       data: newData.slice((page - 1) * pageSize, page * pageSize),
       total: newData.length,
-      amountTotal: amountTotal,
+      amountTotal,
     })
   },
 
@@ -43,29 +38,24 @@ module.exports = {
     const { amount } = req.body
     let isExist = false
     database = database.map((item) => {
-      if (item.id == id) {
-
+      if (item.id === id) {
         isExist = true
-        item.amount = item.amount-amount
-        return item;
+        item.amount -= amount
+        return item
       }
-      return item;
-    });
+      return item
+    })
 
     if (isExist) {
       res.status(200).end()
-    } else {
-      res.status(404).json(NOTFOUND)
     }
   },
   [`PATCH ${apiPrefix}/remit`] (req, res) {
     const { amount } = req.body
-    amountTotal = amountTotal-amount
+    amountTotal -= amount
     let isExist = true
     if (isExist) {
       res.status(200).end()
-    } else {
-      res.status(404).json(NOTFOUND)
     }
   },
 }

@@ -7,10 +7,10 @@ import { Info, Modal } from './components'
 function FinanceView ({ flowFinance, dispatch }) {
   const { info, modalVisible, pay } = flowFinance
   const modalProps = ({
-    info:info,
+    info,
     onOk (data) {
       dispatch({
-        type: `flowFinance/recharge`,
+        type: 'flowFinance/recharge',
         payload: data,
       })
     },
@@ -19,9 +19,9 @@ function FinanceView ({ flowFinance, dispatch }) {
     payValue: pay,
     visible: modalVisible,
     maskClosable: false,
-    title: `扫码支付`,
+    title: '扫码支付',
     wrapClassName: 'vertical-center-modal',
-    footer:null,
+    footer: null,
     onCancel () {
       dispatch({
         type: 'flowFinance/hideModal',

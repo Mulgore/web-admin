@@ -6,8 +6,11 @@ import Menus from './Menu'
 
 const SubMenu = Menu.SubMenu
 
-const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVisible, location, switchMenuPopover, navOpenKeys, changeOpenKeys, menu }) => {
-  let handleClickMenu = e => e.key === 'logout' && logout()
+const Header = ({ user, logout,update, switchSider, siderFold, isNavbar, menuPopoverVisible, location, switchMenuPopover, navOpenKeys, changeOpenKeys, menu }) => {
+  let handleClickMenu = (e) =>{
+    e.key === 'logout' && logout()
+    e.key === 'update' && update()
+  }
   const menusProps = {
     menu,
     siderFold: false,
@@ -30,17 +33,21 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
           <Icon type={siderFold ? 'menu-unfold' : 'menu-fold'} />
         </div>}
       <div className={styles.rightWarpper}>
-        <div className={styles.button}>
-          <Icon type="mail" />
-        </div>
+        {/*<div className={styles.button}>*/}
+          {/*<Icon type="mail" />*/}
+        {/*</div>*/}
         <Menu mode="horizontal" onClick={handleClickMenu}>
           <SubMenu style={{
             float: 'right',
-          }} title={< span > <Icon type="user" />
+          }}
+            title={<span > <Icon type="user" />
             {user.username} </span>}
           >
+            <Menu.Item key="update">
+              <Icon type="lock" />修改密码
+            </Menu.Item>
             <Menu.Item key="logout">
-              <Icon type="logout" />登 出
+              <Icon type="logout" />退 出
             </Menu.Item>
           </SubMenu>
         </Menu>
@@ -53,6 +60,7 @@ Header.propTypes = {
   menu: PropTypes.array,
   user: PropTypes.object,
   logout: PropTypes.func,
+  update: PropTypes.func,
   switchSider: PropTypes.func,
   siderFold: PropTypes.bool,
   isNavbar: PropTypes.bool,

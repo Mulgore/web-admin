@@ -1,20 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'dva'
-import { routerRedux } from 'dva/router'
+import {connect} from 'dva'
+import {routerRedux} from 'dva/router'
 import List from './List'
 import Filter from './Filter'
+import Modal from './Modal'
 
-const Index = ({ payOrder, dispatch, loading, location }) => {
-  const { list, pagination,isMotion } = payOrder
-  const { query = {}, pathname } = location
-  const { pageSize } = pagination
+const Index = ({payOrder, dispatch, loading, location}) => {
+  const {list, pagination, currentItem, modalVisible} = payOrder
+  const {query = {}, pathname} = location
+  const {pageSize, statPay, statTotal, merchantUid} = pagination
 
   const listProps = {
     pagination,
     dataSource: list,
     loading: loading.effects['payOrder/query'],
-    onChange (page) {
+    onChange(page) {
       dispatch(routerRedux.push({
         pathname,
         query: {
@@ -24,14 +25,41 @@ const Index = ({ payOrder, dispatch, loading, location }) => {
         },
       }))
     },
+    onInfoView(item) {
+      dispatch({
+        type: 'payOrder/showModal',
+        payload: {
+          modalType: 'InfoView',
+          currentItem: item,
+        },
+      })
+    },
+  }
+
+  const modalProps = {
+    item: currentItem,
+    visible: modalVisible,
+    maskClosable: false,
+    confirmLoading: loading.effects.payOrder,
+    title: '详情',
+    wrapClassName: 'vertical-center-modal',
+    footer: null,
+    width: 900,
+    onCancel() {
+      dispatch({
+        type: 'payOrder/hideModal',
+      })
+    },
   }
 
   const filterProps = {
-    isMotion,
     filter: {
       ...location.query,
     },
-    onFilterChange (value) {
+    statPay: statPay,
+    statTotal: statTotal,
+    merchantUidData: merchantUid,
+    onFilterChange(value) {
       dispatch(routerRedux.push({
         pathname: location.pathname,
         query: {
@@ -41,7 +69,16 @@ const Index = ({ payOrder, dispatch, loading, location }) => {
         },
       }))
     },
-    onSearch (fieldsValue) {
+    onFilterDownload(value) {
+      dispatch({
+        type: 'payOrder/download',
+        modalType: 'download',
+        payload: {
+          ...value
+        },
+      })
+    },
+    onSearch(fieldsValue) {
       fieldsValue.keyword.length ? dispatch(routerRedux.push({
         pathname: '/payOrder',
         query: {
@@ -57,7 +94,8 @@ const Index = ({ payOrder, dispatch, loading, location }) => {
 
   return (<div className="content-inner">
     <Filter {...filterProps} />
-        <List {...listProps} />
+    <List {...listProps} />
+    {modalVisible && <Modal {...modalProps} />}
   </div>)
 }
 
@@ -68,4 +106,4 @@ Index.propTypes = {
   dispatch: PropTypes.func,
 }
 
-export default connect(({ payOrder, loading }) => ({ payOrder, loading }))(Index)
+export default connect(({payOrder, loading}) => ({payOrder, loading}))(Index)

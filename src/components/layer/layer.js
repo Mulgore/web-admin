@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import styles from './layer.less'
+
 const { info, success, error, warning, confirm } = Modal
 
 const layer = {
@@ -15,7 +16,7 @@ const layer = {
   confirm,
 }
 
-layer.close = (index) => new Promise((resolve, reject) => {
+layer.close = index => new Promise((resolve, reject) => {
   const { prefixCls } = layer
   let div = document.getElementById(`${prefixCls}-reference-${index}`)
   if (index === undefined) {

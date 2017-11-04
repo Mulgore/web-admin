@@ -62,9 +62,9 @@ const fetch = (options) => {
         data: cloneData,
       })
     case 'post':
-      return axios.post(url, cloneData)
+      return axios.post(url, qs.stringify(cloneData))
     case 'put':
-      return axios.put(url, cloneData)
+      return axios.put(url, qs.stringify(cloneData))
     case 'patch':
       return axios.patch(url, cloneData)
     default:
@@ -87,19 +87,20 @@ export default function request (options) {
   }
 
   return fetch(options).then((response) => {
+
     const { statusText, status } = response
     let data = options.fetchType === 'YQL' ? response.data.query.results.json : response.data
+    console.log(data)
     if (data instanceof Array) {
       data = {
         list: data,
       }
     }
-
     return {
       success: true,
       message: statusText,
       statusCode: status,
-      ...data,
+      ...data.data,
     }
   }).catch((error) => {
     const { response } = error
@@ -109,6 +110,13 @@ export default function request (options) {
       const { data, statusText } = response
       statusCode = response.status
       msg = data.message || statusText
+      switch (statusCode){
+        case 500:
+        case 404:
+        case 502:
+        case 504:
+          msg = '服务器内部异常!'
+      }
     } else {
       statusCode = 600
       msg = error.message || '服务器错误'

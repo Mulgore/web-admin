@@ -1,21 +1,27 @@
 import React from 'react'
-import {layer} from 'components'
 import PropTypes from 'prop-types'
-import {Button, Form, InputNumber, Radio} from 'antd'
+import { Button, Form, InputNumber, Radio } from 'antd'
+
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 const FormItem = Form.Item
 
 const Info = ({
-                info,
-                onOk,
-                form: {
-                  getFieldDecorator,
-                  validateFields,
-                  getFieldsValue,
-                },
-              }) => {
-  const {amount, userId} = info
+  info,
+  onOk,
+  form: {
+    getFieldDecorator,
+    validateFields,
+    getFieldsValue,
+  },
+}) => {
+  const { amount, userId } = info
+  const hasErrors = (userId) => {
+    if (userId == null) {
+      return 'disabled'
+    }
+    return ''
+  }
 
   const handleOk = () => {
     validateFields((errors) => {
@@ -30,14 +36,14 @@ const Info = ({
   }
   const formItemLayout = {
     labelCol: {
-      xs: {span: 24},
-      sm: {span: 6},
+      xs: { span: 24 },
+      sm: { span: 6 },
     },
     wrapperCol: {
-      xs: {span: 24},
-      sm: {span: 14},
+      xs: { span: 24 },
+      sm: { span: 14 },
     },
-  };
+  }
   const tailFormItemLayout = {
     wrapperCol: {
       xs: {
@@ -49,15 +55,15 @@ const Info = ({
         offset: 6,
       },
     },
-  };
-  const payType = '21';
+  }
+  const payType = '21'
 
   return (<Form>
     <FormItem {...formItemLayout} label="账户余额">
-      <label style={{color: 'red'}}>{amount} 元</label>
+      <label style={{ color: 'red' }}>{amount != null ? amount : 0} 元</label>
     </FormItem>
     <FormItem {...formItemLayout} label="账户">
-      {getFieldDecorator('userId', {initialValue: userId})(
+      {getFieldDecorator('userId', { initialValue: userId })(
         <label>{userId}</label>
       )}
     </FormItem>
@@ -81,18 +87,22 @@ const Info = ({
         rules: [
           {
             required: true,
-            message: '提现金额不能为空!'
+            message: '提现金额不能为空!',
           },
         ],
-      })(<InputNumber size="large" min={5} max={50000} style={{width: '150px'}}
-                      placeholder="请输入金额(5-50000)"></InputNumber>)}
+      })(<InputNumber size="large"
+        min={5}
+        max={50000}
+        style={{ width: '150px' }}
+        placeholder="请输入金额(5-50000)"
+      />)}
     </FormItem>
     <FormItem {...formItemLayout} label="支付方式" hasFeedback>
-      {getFieldDecorator('payType',{initialValue: payType,
+      {getFieldDecorator('payType', { initialValue: payType,
         rules: [
           {
             required: true,
-            message: '支付方式不能为空!'
+            message: '支付方式不能为空!',
           },
         ],
       })(
@@ -104,11 +114,9 @@ const Info = ({
       )}
     </FormItem>
     <FormItem {...tailFormItemLayout}>
-      <Button type='primary' onClick={handleOk}>立即充值</Button>
+      <Button type="primary" onClick={handleOk} disabled={hasErrors(userId)}>立即充值</Button>
     </FormItem>
   </Form>)
-
-
 }
 
 

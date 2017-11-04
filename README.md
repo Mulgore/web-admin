@@ -1,27 +1,5 @@
 # Antd Admin
 
-[![React](https://img.shields.io/badge/react-^15.6.1-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
-[![Ant Design](https://img.shields.io/badge/ant--design-^2.11.2-yellowgreen.svg?style=flat-square)](https://github.com/ant-design/ant-design)
-[![dva](https://img.shields.io/badge/dva-^1.2.0-orange.svg?style=flat-square)](https://github.com/dvajs/dva)
-
-[![GitHub issues](https://img.shields.io/github/issues/zuiidea/antd-admin.svg?style=flat-square)](https://github.com/zuiidea/antd-admin)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/zuiidea/antd-admin/pulls)
-[![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
-## 说明
-
--  作为一名JAVA后端开发者接触前段这一块从开始的懵逼，到现在的觉得越来越有意思，本人比较喜欢bootstrap风格的后台，写得不好的地方希望大家能够提建议
--  感谢[zuiidea](https://github.com/zuiidea/antd-admin)大哥的这个开源项目，本项目也是借鉴他的项目进行二次开发的，再次感谢！
--  [ant-design](https://github.com/ant-design/ant-design)这个阿里的框架确实不错，希望我的这个项目能够帮助更多的人学习这个框架
-
-## 特性
-
--   基于[react](https://github.com/facebook/react)，[ant-design](https://github.com/ant-design/ant-design)，[dva](https://github.com/dvajs/dva)，[Mock](https://github.com/nuysoft/Mock) 企业级后台管理系统最佳实践。
--   基于Antd UI 设计语言，提供后台管理系统常见使用场景。
--   基于[dva](https://github.com/dvajs/dva)动态加载 Model 和路由，按需加载。
--   使用[roadhog](https://github.com/sorrycc/roadhog)本地调试和构建，其中Mock功能实现脱离后端独立开发。
--   浅度响应式设计。
-
 ## 开发构建
 
 ### 目录结构
@@ -61,7 +39,6 @@
 
 克隆项目文件:
 
-    git clone https://github.com/Mulgore/dva-ant-admin
 
 进入目录安装依赖:
 
@@ -87,3 +64,4 @@ npm run build
 ```bash
 npm run lint
 ```
+

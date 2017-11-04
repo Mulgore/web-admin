@@ -1,32 +1,93 @@
-@import "../../../../themes/vars.less";
+.divQRcode {
+  width: 360px;
+  height: 360px;
+}
 
-.numberCard {
-  padding: 32px;
-  margin-bottom: 24px;
-  cursor: pointer;
+.QRcodeItem {
+  position: absolute;
+  margin-top: 135px;
+  margin-left: 180px;
+}
+.divBorder {
+  position: absolute;
+  margin-top: 115px;
+  width: 160px;
+  height: 200px;
+  margin-left: 165px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+}
+.titleScan {
+  position: absolute;
+  padding-top: 280px;
+  margin-left: 180px;
+}
 
-  .iconWarp {
-    font-size: 54px;
-    float: left;
+.title {
+  position: absolute;
+  padding-top: 46px;
+  margin-left: 200px;
+}
+
+.amountTitle {
+  position: absolute;
+  padding-top: 80px;
+  margin-left: 190px;
+}
+@media (min-width: 1600px) {
+  .QRcodeItem {
+    position: absolute;
+    margin-top: 135px;
+    margin-left: 180px;
   }
-
-  .content {
-    width: 100%;
-    padding-left: 78px;
-
-    .title {
-      line-height: 16px;
-      font-size: 16px;
-      margin-bottom: 8px;
-      height: 16px;
-      .text-overflow();
-    }
-
-    .number {
-      line-height: 32px;
-      font-size: 24px;
-      height: 32px;
-      .text-overflow();
-    }
+  .divBorder {
+    position: absolute;
+    margin-top: 115px;
+    width: 160px;
+    height: 200px;
+    margin-left: 165px;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+  }
+  .titleScan {
+    position: absolute;
+    padding-top: 280px;
+    margin-left: 180px;
   }
 }
+
+@media (max-width: 767px) {
+
+  .QRcodeItem {
+    position: absolute;
+    margin-top: 135px;
+    margin-left: 120px;
+  }
+  .divBorder {
+    position: absolute;
+    margin-top: 115px;
+    margin-left: 105px;
+    width: 160px;
+    height: 200px;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+  }
+  .titleScan {
+    position: absolute;
+    padding-top: 280px;
+    margin-left: 118px;
+  }
+
+  .title {
+    position: absolute;
+    padding-top: 46px;
+    margin-left: 140px;
+  }
+  .amountTitle {
+    position: absolute;
+    padding-top: 80px;
+    margin-left: 128px;
+  }
+}
+
+

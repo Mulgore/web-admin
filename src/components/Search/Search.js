@@ -18,13 +18,13 @@ class Search extends React.Component {
     }
     if (this.props.onSearch) this.props.onSearch(data)
   }
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({
       ...this.state,
       clearVisible: e.target.value !== '',
     })
   }
-  handleSelectChange = value => {
+  handleSelectChange = (value) => {
     this.setState({
       ...this.state,
       selectValue: value,

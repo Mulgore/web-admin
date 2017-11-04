@@ -1,8 +1,4 @@
-.idea
-.vscode
-.DS_Store
 dist
-*.zip
 node_modules
 yarn.lock
 npm-debug.log

@@ -1,20 +1,21 @@
 const Mock = require('mockjs')
 const config = require('../utils/config')
+
 const { apiPrefix } = config
 
 const Info = Mock.mock({
-  'info':
+  info:
     {
-      'amount': '123122',
-      'userId': '10619283712',
+      amount: '123122',
+      userId: '10619283712',
     },
 })
 
 const Pay = Mock.mock({
-  'pay':
+  pay:
     {
-      'url': 'https://weixin.fulapay.com/wxpay/input.html?merchantNo=88791831237436026880',
-      'amount':0
+      url: 'https://weixin.fulapay.com/wxpay/input.html?merchantNo=88791831237436026880',
+      amount: 0,
     },
 })
 

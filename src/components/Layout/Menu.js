@@ -12,7 +12,7 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
 
   // 递归生成菜单
   const getMenus = (menuTreeN, siderFoldN) => {
-    return menuTreeN.map(item => {
+    return menuTreeN.map((item) => {
       if (item.children) {
         if (item.mpid) {
           levelMap[item.id] = item.mpid

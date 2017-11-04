@@ -6,7 +6,7 @@ import List from './List'
 import Filter from './Filter'
 
 const Index = ({ flowOrder, dispatch, loading, location }) => {
-  const { list, pagination,isMotion } = flowOrder
+  const { list, pagination, isMotion } = flowOrder
   const { query = {}, pathname } = location
   const { pageSize } = pagination
 
@@ -57,7 +57,7 @@ const Index = ({ flowOrder, dispatch, loading, location }) => {
 
   return (<div className="content-inner">
     <Filter {...filterProps} />
-        <List {...listProps} />
+    <List {...listProps} />
   </div>)
 }
 

@@ -4,10 +4,11 @@ import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import List from './List'
 import Filter from './Filter'
+import Modal from './Modal'
 
 const Index = ({ notWithdrawOrder, dispatch, loading, location }) => {
-  const { list, pagination } = notWithdrawOrder
-  const { pageSize } = pagination
+  const { list, pagination,currentItem, modalVisible } = notWithdrawOrder
+  const { pageSize, statPay, statTotal, merchants } = pagination
 
   const listProps = {
     dataSource: list,
@@ -25,9 +26,37 @@ const Index = ({ notWithdrawOrder, dispatch, loading, location }) => {
         },
       }))
     },
+    onInfoView (item) {
+      dispatch({
+        type: 'notWithdrawOrder/showModal',
+        payload: {
+          modalType: 'InfoView',
+          currentItem: item,
+        },
+      })
+    },
+  }
+
+  const modalProps = {
+    item: currentItem,
+    visible: modalVisible,
+    maskClosable: false,
+    confirmLoading: loading.effects.payOrder,
+    title: '详情',
+    wrapClassName: 'vertical-center-modal',
+    footer: null,
+    width: 900,
+    onCancel () {
+      dispatch({
+        type: 'notWithdrawOrder/hideModal',
+      })
+    },
   }
 
   const filterProps = {
+    statPay: statPay,
+    statTotal: statTotal,
+    merchants:merchants,
     filter: {
       ...location.query,
     },
@@ -40,6 +69,15 @@ const Index = ({ notWithdrawOrder, dispatch, loading, location }) => {
           pageSize,
         },
       }))
+    },
+    onFilterDownload(value){
+      dispatch({
+        type: 'notWithdrawOrder/download',
+        modalType: 'download',
+        payload: {
+          ...value
+        },
+      })
     },
     onSearch (fieldsValue) {
       fieldsValue.keyword.length ? dispatch(routerRedux.push({
@@ -57,7 +95,8 @@ const Index = ({ notWithdrawOrder, dispatch, loading, location }) => {
 
   return (<div className="content-inner">
     <Filter {...filterProps} />
-        <List {...listProps} />
+    <List {...listProps} />
+    {modalVisible && <Modal {...modalProps} />}
   </div>)
 }
 

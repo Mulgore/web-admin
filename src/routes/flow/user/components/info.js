@@ -1,19 +1,21 @@
 import React from 'react'
 import {layer} from 'components'
 import PropTypes from 'prop-types'
-import {Button, Form, Input, Radio} from 'antd'
-const RadioButton = Radio.Button
-const RadioGroup = Radio.Group
+import {Button, Form, Input, Cascader} from 'antd'
+
 const FormItem = Form.Item
 
-const hasErrors = (amount)=>{
-  if (amount == ''){
+const hasErrors = (amount, permission) => {
+  if (amount == '') {
     return 'disabled'
   }
-  if (amount == null){
+  if (amount == null) {
     return 'disabled'
   }
-  if (amount <= 0){
+  if (amount <= 0) {
+    return 'disabled'
+  }
+  if (permission !== 1) {
     return 'disabled'
   }
   return ''
@@ -21,7 +23,10 @@ const hasErrors = (amount)=>{
 
 const Info = ({
                 info,
+                flowResult=[],
                 onOk,
+                getFlowData,
+                onEditFlowPay,
                 form: {
                   getFieldDecorator,
                   getFieldsValue,
@@ -29,8 +34,7 @@ const Info = ({
                 },
 
               }) => {
-  const {amount, sales, permission, userId,  yDX = [], yLT = [], yYD = [], nDX = [], nLT = [], nYD = []} = info
-
+  const {amount, sales, permission, userId} = info
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -39,8 +43,21 @@ const Info = ({
       const data = {
         ...getFieldsValue(),
       }
+      let flowId = data.flowId[0]
+      delete data.flowId
+      data.flowId = flowId
       onOk(data)
     })
+  }
+const handleFlowData=() =>{
+    const data = {
+      ...getFieldsValue(),
+    }
+    getFlowData(data)
+}
+
+  const handleFlowPayOk = () => {
+    onEditFlowPay()
   }
 
   const formItemLayout = {
@@ -52,7 +69,7 @@ const Info = ({
       xs: {span: 24},
       sm: {span: 14},
     },
-  };
+  }
   const tailFormItemLayout = {
     wrapperCol: {
       xs: {
@@ -64,16 +81,23 @@ const Info = ({
         offset: 6,
       },
     },
-  };
-  const Arr = (flows) => {
-    if (flows != null) {
-      const menu = flows.map(item => <RadioButton value={item.id}>{item.value}</RadioButton>)
-      return <RadioGroup size="large">{menu}</RadioGroup>
+  }
+  const Status = (status) => {
+    switch (status) {
+      case 1:
+        return <Button type="dashed">已开通</Button>
+      case 0:
+        return <Button type="dashed">审核中</Button>
+      case 2:
+        return <Button type="dashed">已冻结</Button>
+      default:
+        return <Button type="primary" onClick={handleFlowPayOk}>立即申请</Button>
     }
   }
 
-  const mobile = '';
-  const payType = '21';
+  function displayRender(label) {
+    return label[label.length - 1];
+  }
 
   return (<Form>
     <FormItem {...formItemLayout} label="账户余额">
@@ -81,7 +105,6 @@ const Info = ({
     </FormItem>
     <FormItem {...formItemLayout} label="充值号码" hasFeedback>
       {getFieldDecorator('mobile', {
-        initialValue: mobile,
         rules: [
           {
             required: true,
@@ -89,120 +112,45 @@ const Info = ({
             message: '请输入正确的电话号码!',
           },
         ],
-      })(<Input size="large" style={{width: '150px'}} placeholder="请输入充值手机号"></Input>)}
+      })(<Input size="large" style={{width: '150px'}} onBlur={handleFlowData} placeholder="请输入充值手机号"/>)}
     </FormItem>
-    <FormItem {...formItemLayout} label="支付方式" hasFeedback>
-      {getFieldDecorator('payType', {
-        initialValue: payType,
+    <FormItem {...formItemLayout} label="流量套餐">
+      {getFieldDecorator('flowId', {
         rules: [
           {
             required: true,
-            message: '请选择支付方式!',
+            message: '请选择充值流量!',
           },
         ],
-      })(<RadioGroup size="large">
-        <RadioButton value="21">微信支付</RadioButton>
-        <RadioButton value="41">支付宝</RadioButton>
-        <RadioButton value="11" disabled>银行卡</RadioButton>
-      </RadioGroup>)}
-    </FormItem>
-    <FormItem {...formItemLayout} label="全国流量">
-    </FormItem>
-    <FormItem {...formItemLayout} label="移动" hasFeedback>
-      {getFieldDecorator('pay', {
-        rules: [
-          {
-            required: true,
-            message: '请选择充值流量!',
-          },
-        ]
-      })(Arr(yYD))}
-    </FormItem>
-    <FormItem {...formItemLayout} label="联通" hasFeedback>
-      {getFieldDecorator('pay',{
-        rules: [
-          {
-            required: true,
-            message: '请选择充值流量!',
-          },
-        ]
-      })(Arr(yLT))}
-    </FormItem>
-    <FormItem {...formItemLayout} label="电信" hasFeedback>
-      {getFieldDecorator('pay',{
-        rules: [
-          {
-            required: true,
-            message: '请选择充值流量!',
-          },
-        ]
-      })(Arr(yDX))}
-    </FormItem>
-    <FormItem {...formItemLayout} label="省内流量">
-    </FormItem>
-    <FormItem {...formItemLayout} label="移动" hasFeedback>
-      {getFieldDecorator('pay',{
-        rules: [
-          {
-            required: true,
-            message: '请选择充值流量!',
-          },
-        ]
-      })(Arr(nYD))}
-    </FormItem>
-    <FormItem {...formItemLayout} label="联通" hasFeedback>
-      {getFieldDecorator('pay',{
-        rules: [
-          {
-            required: true,
-            message: '请选择充值流量!',
-          },
-        ]
-      })(Arr(nLT))}
-    </FormItem>
-    <FormItem {...formItemLayout} label="电信" hasFeedback>
-      {getFieldDecorator('pay',{
-        rules: [
-          {
-            required: true,
-            message: '请选择充值流量!',
-          },
-        ]
-      })(Arr(nDX))}
+      })(<Cascader placeholder="请选择流量套餐" options={flowResult} style={{width: '150px'}} expandTrigger="hover" displayRender={displayRender}/>)}
     </FormItem>
     <FormItem {...tailFormItemLayout}>
-      <Button type='primary' onClick={handleOk} disabled={hasErrors(amount)}>立即充值</Button>
+      <Button type="primary" onClick={handleOk} disabled={hasErrors(amount, permission)}>立即充值</Button>
     </FormItem>
     <FormItem {...formItemLayout} label="账户">
       <label>{userId}</label>
     </FormItem>
     <FormItem {...formItemLayout} label="业务权限">
-      <Button type='dashed'>{permission}</Button>
+      {Status(permission)}
     </FormItem>
     <FormItem {...formItemLayout} label="折扣">
       <label style={{color: 'red'}}>{sales}</label>
     </FormItem>
 
   </Form>)
-
 }
 
 Info.propTypes = {
   amount: PropTypes.number,
   sales: PropTypes.string,
   onOk: PropTypes.func,
+  getFlowData: PropTypes.func,
+  onEditFlowPay: PropTypes.func,
   permission: PropTypes.string,
   userId: PropTypes.string,
   form: PropTypes.object,
   filter: PropTypes.object,
-  yDX: PropTypes.array.isRequired,
-  yLT: PropTypes.array.isRequired,
-  yYD: PropTypes.array.isRequired,
-  nDX: PropTypes.array.isRequired,
-  nLT: PropTypes.array.isRequired,
-  nYD: PropTypes.array.isRequired,
 }
 
 export default Form.create()(Info)
-
 
