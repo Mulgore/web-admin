@@ -2,9 +2,9 @@ const APIV1 = '/api/v1'
 
 
 module.exports = {
-  name: '代理商后台',
+  name: '管理后台',
   prefix: 'antdAdmin',
-  footerText: '代理商后台  © 2017',
+  footerText: '管理后台  © 2017',
   logo: '/logo.png',
   iconFontCSS: '/iconfont.css',
   iconFontJS: '/iconfont.js',
