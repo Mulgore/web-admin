@@ -1,14 +1,12 @@
 import modelExtend from 'dva-model-extend'
 import {
   query,
-  queryPayType,
-  disabledAgent,
-  create,
-  update,
-  updateEdit,
-  getBankData,
-  removeRate,
-  addRate,
+  queryChild,
+  deletePer,
+  updatePerm,
+  stateChild,
+  removeChild,
+  addChildPerm,
   queryProfit,
   queryProfitRecord,
   queryProfitWithdraw,
@@ -22,9 +20,9 @@ export default modelExtend(pageModel, {
   state: {
     currentItem: {},
     modalVisible: false,
-    modalVisiblePayType: false,
+    modalVisibleChild: false,
     modalVisibleEdit: false,
-    modalVisibleBank: false,
+    modalVisibleAddChild: false,
     modalVisibleRate: false,
     modalVisibleProfit: false,
     modalVisibleProfitRecord: false,
@@ -43,22 +41,22 @@ export default modelExtend(pageModel, {
             }
           })
         }
-        if (location.pathname === '/settingPermission/profitRecord') {
-          dispatch({
-            type: 'queryProfitWithdraw',
-            payload: {
-              ...location.query,
-            }
-          })
-        }
-        if (location.pathname === '/settingPermission/profitRecord') {
-          dispatch({
-            type: 'query',
-            payload: {
-              ...location.query,
-            }
-          })
-        }
+        // if (location.pathname === '/settingPermission/profitRecord') {
+        //   dispatch({
+        //     type: 'queryProfitWithdraw',
+        //     payload: {
+        //       ...location.query,
+        //     }
+        //   })
+        // }
+        // if (location.pathname === '/settingPermission/profitRecord') {
+        //   dispatch({
+        //     type: 'query',
+        //     payload: {
+        //       ...location.query,
+        //     }
+        //   })
+        // }
       })
     },
   },
@@ -82,15 +80,15 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
-    * queryPayType({payload = {}}, {call, put}) {
-      const data = yield call(queryPayType, payload)
+    * queryChild({payload = {}}, {call, put}) {
+      const data = yield call(queryChild, payload)
       if (data.success) {
         yield put({
-          type: 'showModalPayType',
+          type: 'showModalChild',
           payload: {
-            listPayType: data.data,
-            agentUid: payload.uid,
-            paginationPayType: {
+            listChild: data.data,
+            pid: payload.id,
+            paginationChild: {
               current: Number(payload.page) || 1,
               pageSize: Number(payload.pageSize) || 10,
               total: data.total,
@@ -101,113 +99,76 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
-    * updateAgentView({payload}, {call, put}) {
-      const data = yield call(update, {id: payload.id})
-      if (data.success) {
-        yield put({
-          type: 'showModalEdit',
-          payload: {
-            modalType: 'update',
-            agentInfo: {
-              ...data.agentInfo,
-              realName: data.realName,
-              idNumber: data.idNumber,
-            },
-            agentLevelData: data.agentLevelData,
-            addressData: data.addressData,
-          }
-        })
-      } else {
-        throw data
-      }
+    * updatePermView({payload}, {put}) {
+      yield put({
+        type: 'showModalEdit',
+        payload: {
+          modalType: 'update',
+          permInfo: {
+            ...payload,
+          },
+        }
+      })
     },
-    * updateAgent({payload}, {call, put}) {
-      const data = yield call(updateEdit, payload)
+    * updatePermChildView({payload}, {put}) {
+      yield put({
+        type: 'showModalAddChild',
+        payload: {
+          modalType: 'update',
+          childInfo: {
+            ...payload,
+          },
+        }
+      })
+    },
+    * updatePerm({payload}, {call, put}) {
+      const data = yield call(updatePerm, payload)
       if (data.success) {
+        message.success(data.message)
         yield put({type: 'hideModalEdit'})
-        yield put({
-          type: 'showModalBank',
-          payload: {
-            agentBank: {
-              ...data.agentBank,
-              bankId: data.bankId,
-            },
-            agentUid: data.agentBank.uid,
-            bankSubId: data.bankSubId,
-            bankLists: data.bankLists,
-            bankSubLists: data.bankSubLists,
-          }
-        })
-      } else {
-        throw data
-      }
-    },
-    * removeRate({payload}, {call, put}) {
-      const data = yield call(removeRate, {id: payload.id})
-      if (data.success) {
-        message.success(data.message)
-        yield put({
-          type: 'queryPayType',
-          payload: data
-        })
-      } else {
-        throw data
-      }
-    },
-    * addRate({payload}, {call, put}) {
-      const data = yield call(addRate, payload)
-      if (data.success) {
-        message.success(data.message)
-        yield put({
-          type: 'hideModalRate',
-          payload: data
-        })
-        yield put({
-          type: 'queryPayType',
-        })
-      } else {
-        throw data
-      }
-    },
-    * updateBank({payload}, {call, put}) {
-      const data = yield call(updateEdit, payload)
-      if (data.success) {
-        yield put({type: 'hideModalBank'})
         yield put({type: 'query'})
       } else {
         throw data
       }
     },
-    * createAgentView({payload}, {call, put}) {
-      const data = yield call(create, payload)
+    * stateChild({payload}, {call, put}) {
+      const data = yield call(stateChild, payload)
       if (data.success) {
+        message.success(data.message)
         yield put({
-          type: 'showModalEdit',
-          payload: {
-            modalType: 'create',
-            addressData: data.addressData,
-            agentLevelData:data.agentLevelData,
-          }
+          type: 'queryChild',
+          payload: {id: payload.pid}
         })
       } else {
         throw data
       }
     },
-    * queryProfit({payload}, {call, put}) {
-      const data = yield call(queryProfit, {id: payload.id})
+    * addChildPerm({payload}, {call, put}) {
+      const data = yield call(updatePerm, payload)
       if (data.success) {
+        message.success(data.message)
+        yield put({type: 'hideModalAddChild'})
+        yield put({type: 'query'})
+      } else {
+        throw data
+      }
+    },
+    * updateChildPerm({payload}, {call, put}) {
+      const data = yield call(updatePerm, payload)
+      if (data.success) {
+        message.success(data.message)
+        yield put({type: 'hideModalAddChild'})
+        console.log(payload.pid)
         yield put({
-          type: 'showModalProfit',
-          payload: {
-            ...data
-          }
+          type: 'queryChild',
+          payload: {id: payload.pid}
         })
       } else {
         throw data
       }
     },
-    * disabledAgent({payload}, {call, put}) {
-      const data = yield call(disabledAgent, {id: payload.currentItem.id})
+    * deletePer({payload}, {call, put}) {
+      const data = yield call(deletePer, {id: payload.currentItem.id})
       if (data.success) {
         message.success(data.message)
         yield put({type: 'query'})
@@ -216,58 +177,6 @@ export default modelExtend(pageModel, {
       }
     },
 
-    * getBankData({payload}, {call, put}) {
-      const data = yield call(getBankData, payload)
-      if (data.success) {
-        yield put({
-          type: 'showModalBank',
-          payload: {
-            bankSubId: data.bankSubId,
-            bankSubLists: data.bankSubLists,
-          },
-        })
-      } else {
-        throw data
-      }
-    },
-    * queryProfitWithdraw({payload = {}}, {call, put}) {
-      const data = yield call(queryProfitWithdraw, payload)
-      if (data.success) {
-        yield put({
-          type: 'showModalProfitWithdraw',
-          payload: {
-            listProfitWithdraw: data.data,
-            agentUid: payload.uid,
-            paginationProfitWithdraw: {
-              current: Number(payload.page) || 1,
-              pageSize: Number(payload.pageSize) || 10,
-              total: data.total,
-            },
-          },
-        })
-      } else {
-        throw data
-      }
-    },
-    * queryProfitRecord({payload = {}}, {call, put}) {
-      const data = yield call(queryProfitRecord, payload)
-      if (data.success) {
-        yield put({
-          type: 'showModalProfitRecord',
-          payload: {
-            listProfitRecord: data.data,
-            agentUid: payload.uid,
-            paginationProfitRecord: {
-              current: Number(payload.page) || 1,
-              pageSize: Number(payload.pageSize) || 10,
-              total: data.total,
-            },
-          },
-        })
-      } else {
-        throw data
-      }
-    },
   },
 
   reducers: {
@@ -280,12 +189,12 @@ export default modelExtend(pageModel, {
       return {...state, modalVisible: false}
     },
 
-    showModalPayType(state, {payload}) {
-      return {...state, ...payload, modalVisiblePayType: true}
+    showModalChild(state, {payload}) {
+      return {...state, ...payload, modalVisibleChild: true}
     },
 
-    hideModalPayType(state) {
-      return {...state, modalVisiblePayType: false}
+    hideModalChild(state) {
+      return {...state, modalVisibleChild: false}
     },
 
     showModalEdit(state, {payload}) {
@@ -296,12 +205,12 @@ export default modelExtend(pageModel, {
       return {...state, modalVisibleEdit: false}
     },
 
-    showModalBank(state, {payload}) {
-      return {...state, ...payload, modalVisibleBank: true}
+    showModalAddChild(state, {payload}) {
+      return {...state, ...payload, modalVisibleAddChild: true}
     },
 
-    hideModalBank(state) {
-      return {...state, modalVisibleBank: false}
+    hideModalAddChild(state) {
+      return {...state, modalVisibleAddChild: false}
     },
 
     showModalRate(state, {payload}) {

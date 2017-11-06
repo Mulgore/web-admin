@@ -14,14 +14,21 @@ const status = (key) => {
 const List = ({...tableProps}) => {
   const columns = [
     {
-      title: '等级',
-      dataIndex: 'name',
+      title: '支付方式',
+      dataIndex: 'payType',
+      render: text => globalPayType(text),
     }, {
-      title: '级别',
-      dataIndex: 'sort',
+      title: '结算周期',
+      dataIndex: 'settleType',
+      render: text => globalSettleType(text),
     }, {
-      title: '备注',
-      dataIndex: 'description',
+      title: '费率',
+      dataIndex: 'feeRate',
+      render: text => feeRateFormat(text),
+    }, {
+      title: '状态',
+      dataIndex: 'status',
+      render: text => status(text),
     },
   ]
 

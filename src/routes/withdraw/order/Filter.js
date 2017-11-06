@@ -112,29 +112,13 @@ const Filter = ({
           </Select>)}
         </Col>
         {/*<Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>*/}
-          {/*{getFieldDecorator('payType')(<Select placeholder="请选择支付方式" size="large"*/}
+          {/*{getFieldDecorator('payType')(<Select placeholder="请选择订单类型" size="large"*/}
                                                 {/*onChange={handleChange.bind(null, 'payType')} filterOption={false}*/}
                                                 {/*style={{width: '100%'}}>*/}
-            {/*<option value="10">银联支付</option>*/}
-            {/*<option value="11">银联Wap(勇易)</option>*/}
-            {/*<option value="12">银行快捷</option>*/}
-            {/*<option value="13">银联快捷(摩宝)</option>*/}
-            {/*<option value="14">银联快捷(大额)</option>*/}
-            {/*<option value="20">微信支付(APP)</option>*/}
-            {/*<option value="21">微信支付(二维码)</option>*/}
-            {/*<option value="22">微信支付(扫码)</option>*/}
-            {/*<option value="23">微信支付(公众号)</option>*/}
-            {/*<option value="40">微信支付(APP)</option>*/}
-            {/*<option value="41">支付宝(二维码)</option>*/}
-            {/*<option value="42">支付宝(扫码)</option>*/}
-            {/*<option value="43">支付宝(服务窗)</option>*/}
-            {/*<option value="31">QQ(二维码)</option>*/}
-            {/*<option value="32">QQ(扫码)</option>*/}
-            {/*<option value="50">MPOS</option>*/}
-            {/*<option value="51">MPOS收款(插件)</option>*/}
-            {/*<option value="52">POS收款</option>*/}
-            {/*<option value="61">百度钱包(二维码)</option>*/}
-            {/*<option value="62">百度钱包(扫码)</option>*/}
+            {/*<option value="1">收款提现</option>*/}
+            {/*<option value="2">分润提现</option>*/}
+            {/*<option value="3">大额转账</option>*/}
+            {/*<option value="5">信用卡还款</option>*/}
           {/*</Select>)}*/}
         {/*</Col>*/}
         <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>

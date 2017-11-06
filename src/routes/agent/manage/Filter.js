@@ -32,6 +32,10 @@ const Filter = ({
                   },
                 }) => {
   const handleFields = (fields) => {
+    const {createTime} = fields
+    if (createTime.length) {
+      fields.createTime = [createTime[0].format('YYYY-MM-DD'), createTime[1].format('YYYY-MM-DD')]
+    }
     return fields
   }
 
@@ -63,18 +67,36 @@ const Filter = ({
     onFilterChange(fields)
   }
 
+  let initialCreateTime = []
+  if (filter.createTime && filter.createTime[0]) {
+    initialCreateTime[0] = moment(filter.createTime[0])
+  }
+  if (filter.createTime && filter.createTime[1]) {
+    initialCreateTime[1] = moment(filter.createTime[1])
+  }
+
   return (<div>
     <Row gutter={24}>
       <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>
-        {getFieldDecorator('title')(<Input placeholder="菜单名称" size="large"/>)}
+        {getFieldDecorator('mobile')(<Input placeholder="手机号" onSelect={handleSubmit} size="large"/>)}
       </Col>
       <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>
-        {getFieldDecorator('state')(<Select placeholder="请选择权限状态" size="large"
-                                             onChange={handleChange.bind(null, 'state')} filterOption={false}
+        {getFieldDecorator('agentLevel')(<Select placeholder="请选择代理商等级" size="large"
+                                             onChange={handleChange.bind(null, 'agentLevel')} filterOption={false}
                                              style={{width: '100%'}}>
-          <Option value="1">启用</Option>
-          <Option value="0">禁用</Option>
+          <Option value="1">全国代理</Option>
+          <Option value="2">省级代理</Option>
+          <Option value="3">市级代理</Option>
+          <Option value="4">区域代理</Option>
+          <Option value="5">快捷代理</Option>
+          <Option value="6">流量代理</Option>
         </Select>)}
+      </Col>
+      <Col {...ColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>
+        {getFieldDecorator('createTime', {initialValue: initialCreateTime})(
+          <RangePicker style={{width: '100%'}} size="large" onSelect={handleSubmit}
+                       onChange={handleChange.bind(null, 'createTime')}/>
+        )}
       </Col>
       <Col {...TwoColProps} xl={{span: 6}} md={{span: 8}} sm={{span: 12}}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -84,8 +106,8 @@ const Filter = ({
             <Button size="large" icon="reload" onClick={handleReset}>重置</Button>
           </div>
           <div>
-            <Button type="primary" size="large" className="margin-right" icon="add"
-                    onClick={onCreate}>添加菜单</Button>
+            <Button type="primary" size="large" className="margin-right" icon="user-add"
+                    onClick={onCreate}>添加代理商</Button>
           </div>
         </div>
       </Col>

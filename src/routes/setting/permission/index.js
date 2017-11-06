@@ -4,35 +4,21 @@ import {connect} from 'dva'
 import {routerRedux} from 'dva/router'
 import List from './List'
 import Filter from './Filter'
-import Modal from './Modal'
-import PayTypeModal from './PayTypeModal'
+import ChildModal from './ChildModal'
 import EditModal from './EditModal'
-import BankModal from './BankModal'
-import RateModal from './RateModal'
-import ProfitModal from './ProfitModal'
-import ProfitRecordModal from './ProfitRecordModal'
-import ProfitWithdrawModal from './ProfitWithdrawModal'
+import AddChildModal from './AddChildModal'
 
-const Index = ({agentManage, dispatch, loading, location}) => {
+const Index = ({settingPermission, dispatch, loading, location}) => {
   const {
-    modalVisible, list, pagination, agentInfo, agentBank, agentUid,
-    addressData, agentLevelData, bankLists, bankSubLists, modalType, currentItem,
-    modalVisiblePayType, listPayType, paginationPayType,
-    modalVisibleEdit,
-    bankSubId,
-    modalVisibleBank,
-    modalVisibleRate,
-    modalVisibleProfit,
-    modalVisibleProfitRecord, paginationProfitRecord, listProfitRecord,
-    modalVisibleProfitWithdraw, paginationProfitWithdraw, listProfitWithdraw
-
-  } = agentManage
+    list, pagination, permInfo, pid, modalType, currentItem, childInfo,
+    modalVisibleChild, listChild, paginationChild, modalVisibleEdit, modalVisibleAddChild
+  } = settingPermission
   const {query = {}, pathname} = location
   const {pageSize} = pagination
   const listProps = {
     pagination,
     dataSource: list,
-    loading: loading.effects['agentManage/query'],
+    loading: loading.effects['settingPermission/query'],
     onChange(page) {
       dispatch(routerRedux.push({
         pathname,
@@ -43,50 +29,41 @@ const Index = ({agentManage, dispatch, loading, location}) => {
         },
       }))
     },
-    onInfoView(item) {
-      dispatch({
-        type: 'agentManage/showModal',
-        payload: {
-          currentItem: item,
-        },
-      })
-    },
     onEditView(item) {
       dispatch({
-        type: 'agentManage/updateAgentView',
+        type: 'settingPermission/updatePermView',
         payload: {
-          id: item.uid,
+          ...item,
         },
       })
     },
-    onDisabledView(item) {
+    onDeleteView(item) {
       dispatch({
-        type: 'agentManage/disabledAgent',
+        type: 'settingPermission/deletePer',
         payload: {
           currentItem: item,
         },
       })
     },
-    onPayTypeView(item) {
+    onChildView(item) {
       dispatch({
-        type: 'agentManage/queryPayType',
+        type: 'settingPermission/queryChild',
         payload: {
-          uid: item.uid,
+          id: item.id,
         },
       })
     },
-    onProfitView(item) {
+    onAddChildView(item) {
       dispatch({
-        type: 'agentManage/queryProfit',
+        type: 'settingPermission/showModalAddChild',
         payload: {
-          modalType: 'profitView',
-          id: item.uid,
+          pid: item.id,
         },
       })
     },
     onProfitRecord(item) {
       dispatch({
-        type: 'agentManage/queryProfitRecord',
+        type: 'settingPermission/queryProfitRecord',
         payload: {
           uid: item.uid,
         },
@@ -94,7 +71,7 @@ const Index = ({agentManage, dispatch, loading, location}) => {
     },
     onProfitWithdraw(item) {
       dispatch({
-        type: 'agentManage/queryProfitWithdraw',
+        type: 'settingPermission/queryProfitWithdraw',
         payload: {
           uid: item.uid,
         },
@@ -102,36 +79,21 @@ const Index = ({agentManage, dispatch, loading, location}) => {
     },
   }
 
-  const modalProps = {
+  const modalPropsChild = {
     item: currentItem,
-    visible: modalVisible,
+    visible: modalVisibleChild,
     maskClosable: false,
-    title: '详情',
-    wrapClassName: 'vertical-center-modal',
-    footer: null,
-    width: 900,
-    onCancel() {
-      dispatch({
-        type: 'agentManage/hideModal',
-      })
-    },
-  }
-
-  const modalPropsPayType = {
-    item: currentItem,
-    visible: modalVisiblePayType,
-    maskClosable: false,
-    title: '支付配置',
+    title: '下级菜单',
     wrapClassName: 'vertical-center-modal',
     listProps: {
-      pagination: paginationPayType,
-      dataSource: listPayType,
-      loading: loading.effects['agentManage/queryPayType'],
+      pagination: paginationChild,
+      dataSource: listChild,
+      loading: loading.effects['settingPermission/queryChild'],
       onChange(page) {
         dispatch({
-          type: 'agentManage/queryPayType',
+          type: 'settingPermission/queryChild',
           payload: {
-            uid: agentUid,
+            id: pid,
             page: page.current,
             pageSize: page.pageSize,
           },
@@ -142,111 +104,80 @@ const Index = ({agentManage, dispatch, loading, location}) => {
     width: 900,
     onCancel() {
       dispatch({
-        type: 'agentManage/hideModalPayType',
+        type: 'settingPermission/hideModalChild',
       })
     },
-    onAddRate(item) {
+    onEditChild(item) {
       dispatch({
-        type: 'agentManage/showModalRate',
+        type: 'settingPermission/updatePermChildView',
+        payload: item,
+      })
+    },
+    onStartChild(item) {
+      dispatch({
+        type: 'settingPermission/stateChild',
         payload: {
-          item
+          id: item.id,
+          state: 1,
+          pid: pid,
         },
       })
     },
-    onRemoveRate(item) {
+    onRemoveChild(item) {
       dispatch({
-        type: 'agentManage/removeRate',
+        type: 'settingPermission/stateChild',
         payload: {
           id: item.id,
+          state: 0,
+          pid: pid,
         },
       })
     },
   }
 
   const modalPropsEdit = {
-    item: modalType === 'create' ? {} : agentInfo,
-    addressData: addressData,
-    agentLevelData: agentLevelData,
+    item: modalType === 'create' ? {} : permInfo,
     visible: modalVisibleEdit,
     maskClosable: false,
-    title: modalType === 'create' ? '添加代理商' : '修改代理商',
+    title: modalType === 'create' ? '添加权限菜单' : '修改权限菜单',
     wrapClassName: 'vertical-center-modal',
-    width: 900,
     onOk(data) {
       dispatch({
-        type: `agentManage/updateAgent`,
+        type: `settingPermission/updatePerm`,
         payload: data,
       })
     },
     onCancel() {
       dispatch({
-        type: 'agentManage/hideModalEdit',
+        type: 'settingPermission/hideModalEdit',
       })
     },
   }
-
-  const modalPropsBank = {
-    item: agentBank,
-    addressData: addressData,
-    agentUid: agentUid,
-    bankLists: bankLists,
-    bankSubId: bankSubId,
-    bankSubLists: bankSubLists,
-    visible: modalVisibleBank,
+  const modalPropsAddChild = {
+    item: modalType === 'create' ? {} : childInfo,
+    visible: modalVisibleAddChild,
     maskClosable: false,
-    title: '银行卡信息',
+    title: modalType === 'create' ? '添加下级菜单' : '修改下级菜单',
     wrapClassName: 'vertical-center-modal',
-    width: 900,
     onOk(data) {
       dispatch({
-        type: `agentManage/updateBank`,
-        payload: data,
+        type: `settingPermission/addChildPerm`,
+        payload: {
+          ...data,
+        },
       })
     },
-    onBankData(data) {
+    onUpdate(data) {
       dispatch({
-        type: `agentManage/getBankData`,
-        payload: data,
-      })
-    },
-    onCancel() {
-      dispatch({
-        type: 'agentManage/hideModalBank',
-      })
-    },
-  }
-
-  const modalPropsProfit = {
-    item: currentItem.profitInfo,
-    visible: modalVisibleProfit,
-    maskClosable: false,
-    title: '分润清算',
-    wrapClassName: 'vertical-center-modal',
-    footer: null,
-    onCancel() {
-      dispatch({
-        type: 'agentManage/hideModalProfit',
-      })
-    },
-  }
-
-  const modalPropsRate = {
-    item: currentItem.item,
-    agentUid: agentUid,
-    visible: modalVisibleRate,
-    maskClosable: false,
-    title: '开通支付配置',
-    wrapClassName: 'vertical-center-modal',
-    width: 900,
-    onOk(data) {
-      dispatch({
-        type: `agentManage/addRate`,
-        payload: data,
+        type: `settingPermission/updateChildPerm`,
+        payload: {
+          ...data,
+        },
       })
     },
     onCancel() {
       dispatch({
-        type: 'agentManage/hideModalRate',
+        type: 'settingPermission/hideModalAddChild',
       })
     },
   }
@@ -267,103 +198,40 @@ const Index = ({agentManage, dispatch, loading, location}) => {
     },
     onSearch(fieldsValue) {
       fieldsValue.keyword.length ? dispatch(routerRedux.push({
-        pathname: '/agentManage',
+        pathname: '/settingPermission',
         query: {
           field: fieldsValue.field,
           keyword: fieldsValue.keyword,
         },
       })) : dispatch(routerRedux.push({
-        pathname: '/agentManage',
+        pathname: '/settingPermission',
       }))
     },
     onCreate() {
       dispatch({
-        type: `agentManage/createAgentView`,
+        type: `settingPermission/showModalEdit`,
         payload: {
           modalType: 'create',
         },
       })
     }
   }
-  const modalPropsProfitRecord = {
-    visible: modalVisibleProfitRecord,
-    agentUid: agentUid,
-    maskClosable: false,
-    title: '分润入账明细',
-    wrapClassName: 'vertical-center-modal',
-    footer: null,
-    width: 900,
-    onCancel() {
-      dispatch({
-        type: 'agentManage/hideModalProfitRecord',
-      })
-    },
-    listProps: {
-      pagination: paginationProfitRecord,
-      dataSource: listProfitRecord,
-      loading: loading.effects['agentManage/queryProfitRecord'],
-      onChange(page) {
-        dispatch({
-          type: 'agentManage/queryProfitRecord',
-          payload: {
-            page: page.current,
-            pageSize: page.pageSize,
-            uid: agentUid,
-          },
-        })
-      },
-    },
-  }
 
-
-  const modalPropsProfitWithdraw = {
-    visible: modalVisibleProfitWithdraw,
-    maskClosable: false,
-    title: '分润提现',
-    wrapClassName: 'vertical-center-modal',
-    listProps: {
-      pagination: paginationProfitWithdraw,
-      dataSource: listProfitWithdraw,
-      loading: loading.effects['agentManage/queryProfitWithdraw'],
-      onChange(page) {
-        dispatch({
-          type: 'agentManage/queryProfitWithdraw',
-          payload: {
-            page: page.current,
-            pageSize: page.pageSize,
-            uid: agentUid,
-          },
-        })
-      },
-    },
-    footer: null,
-    width: 900,
-    onCancel() {
-      dispatch({
-        type: 'agentManage/hideModalProfitWithdraw',
-      })
-    },
-  }
 
   return (<div className="content-inner">
     <Filter {...filterProps} />
     <List {...listProps} />
-    {modalVisible && <Modal {...modalProps} />}
-    {modalVisiblePayType && <PayTypeModal {...modalPropsPayType} />}
+    {modalVisibleChild && <ChildModal {...modalPropsChild} />}
     {modalVisibleEdit && <EditModal {...modalPropsEdit} />}
-    {modalVisibleBank && <BankModal {...modalPropsBank}/>}
-    {modalVisibleRate && <RateModal {...modalPropsRate}/>}
-    {modalVisibleProfit && <ProfitModal {...modalPropsProfit}/>}
-    {modalVisibleProfitRecord && <ProfitRecordModal {...modalPropsProfitRecord} />}
-    {modalVisibleProfitWithdraw && <ProfitWithdrawModal {...modalPropsProfitWithdraw} />}
+    {modalVisibleAddChild && <AddChildModal {...modalPropsAddChild} />}
   </div>)
 }
 
 Index.propTypes = {
-  agentManage: PropTypes.object,
+  settingPermission: PropTypes.object,
   loading: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
 }
 
-export default connect(({agentManage, loading}) => ({agentManage, loading}))(Index)
+export default connect(({settingPermission, loading}) => ({settingPermission, loading}))(Index)

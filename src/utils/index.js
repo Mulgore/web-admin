@@ -472,6 +472,22 @@ const userStatusItem = (key) => {
       return <label style={{color: '#76d0a3'}}>审核通过</label>
   }
 }
+const ccOrderStatus = (key) => {
+  switch (key) {
+    case 0:
+      return <label style={{color: '#fa90ba'}}>未支付</label>
+    case 1:
+      return <label style={{color: '#7ec2f3'}}>已支付</label>
+    case 2:
+      return <label style={{color: '#76d0a3'}}>还款成功</label>
+    case 3:
+      return <label style={{color: '#f79992'}}>还款失败</label>
+    case 4:
+      return <label style={{color: '#7ec2f3'}}>还款失败（已退款至账户）</label>
+    case 6:
+      return <label style={{color: '#b3acf2'}}>未开始（针对于一键还款）</label>
+  }
+}
 module.exports = {
   config,
   request,
@@ -499,6 +515,7 @@ module.exports = {
   payOrderType,
   userStatusItem,
   payStatus,
+  ccOrderStatus,
   merchantStatusItem,
   merchantTypeItem,
   agentStatusItem,

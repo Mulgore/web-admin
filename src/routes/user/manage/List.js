@@ -39,6 +39,10 @@ const List = ({...tableProps, onUserListView}) => {
       dataIndex: 'createTime',
       render: text => (text != null ? new Date(text).format('yyyy年MM月dd日 H:mm:ss') : ''),
     }, {
+      title: '最后登录时间',
+      dataIndex: 'modifyTime',
+      render: text => (text != null ? new Date(text).format('yyyy年MM月dd日 H:mm:ss') : ''),
+    }, {
       title: '操作',
       width: 100,
       render: (text, record) => {

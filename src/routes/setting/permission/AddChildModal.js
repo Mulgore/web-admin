@@ -16,6 +16,7 @@ const formItemLayout = {
 const modal = ({
                  item,
                  onOk,
+                 onUpdate,
                  form: {
                    getFieldDecorator,
                    validateFields,
@@ -32,8 +33,13 @@ const modal = ({
       const data = {
         ...getFieldsValue(),
       }
-      data.id = item.id;
-      onOk(data)
+      data.pid = item.pid;
+      if (item.id) {
+        data.id = item.id;
+        onUpdate(data)
+      } else {
+        onOk(data)
+      }
     })
   }
 
@@ -65,6 +71,17 @@ const modal = ({
               },
             ],
           })(<Input placeholder="请输入菜单图标"/>)}
+        </FormItem>
+        <FormItem label="菜单链接" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('url', {
+            initialValue: item.url,
+            rules: [
+              {
+                required: true,
+                message: '菜单链接不能为空',
+              },
+            ],
+          })(<Input placeholder="请输入菜单链接"/>)}
         </FormItem>
         <FormItem label="菜单备注" hasFeedback {...formItemLayout}>
           {getFieldDecorator('description', {
