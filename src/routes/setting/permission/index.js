@@ -164,6 +164,7 @@ const Index = ({settingPermission, dispatch, loading, location}) => {
         type: `settingPermission/addChildPerm`,
         payload: {
           ...data,
+          pid: pid,
         },
       })
     },
