@@ -5,9 +5,10 @@ import {routerRedux} from 'dva/router'
 import List from './List'
 import Filter from './Filter'
 import EditModal from './EditModal'
+import PermModal from './PermModal'
 
 const Index = ({settingRole, dispatch, loading, location}) => {
-  const {list, pagination, modalType, roleInfo, modalVisible} = settingRole
+  const {list, pagination, paginationPerm, listPerm, modalType, roleInfo, modalVisible, modalVisiblePerm, level} = settingRole
   const {query = {}, pathname} = location
   const {pageSize} = pagination
   const listProps = {
@@ -29,6 +30,14 @@ const Index = ({settingRole, dispatch, loading, location}) => {
         type: 'settingRole/updateRoleView',
         payload: {
           ...item,
+        },
+      })
+    },
+    onPermList(item) {
+      dispatch({
+        type: 'settingRole/queryPerm',
+        payload: {
+          level: item.sort,
         },
       })
     },
@@ -94,10 +103,58 @@ const Index = ({settingRole, dispatch, loading, location}) => {
       })
     },
   }
+  const modalPropsPerm = {
+    visible: modalVisiblePerm,
+    maskClosable: false,
+    title: '权限菜单列表',
+    wrapClassName: 'vertical-center-modal',
+    listProps: {
+      pagination: paginationPerm,
+      dataSource: listPerm,
+      loading: loading.effects['settingRole/queryPerm'],
+      onChange(page) {
+        dispatch({
+          type: 'settingRole/queryPerm',
+          payload: {
+            page: page.current,
+            pageSize: page.pageSize,
+          },
+        })
+      },
+    },
+    footer: null,
+    width: 900,
+    onCancel() {
+      dispatch({
+        type: 'settingRole/hideModalPerm',
+      })
+    },
+    onStartPerm(item) {
+      dispatch({
+        type: 'settingRole/statusPerm',
+        payload: {
+          id: item.id,
+          level: level,
+          type: 1
+        },
+      })
+    },
+    onRemovePerm(item) {
+      dispatch({
+        type: 'settingRole/statusPerm',
+        payload: {
+          id: item.id,
+          level: level,
+          type: 0
+        },
+      })
+    },
+  }
   return (<div className="content-inner">
     <Filter {...filterProps} />
     <List {...listProps} />
     {modalVisible && <EditModal {...modalProps} />}
+    {modalVisiblePerm && <PermModal {...modalPropsPerm} />}
   </div>)
 }
 

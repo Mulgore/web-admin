@@ -62,7 +62,7 @@ export default modelExtend(pageModel, {
           type: 'showModalChild',
           payload: {
             listChild: data.data,
-            pid: payload.id,
+            level: payload.level,
             paginationChild: {
               current: Number(payload.page) || 1,
               pageSize: Number(payload.pageSize) || 10,

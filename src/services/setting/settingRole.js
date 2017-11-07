@@ -26,3 +26,20 @@ export async function deleteRole (params) {
     data: params,
   })
 }
+
+export async function queryPerm (params) {
+  return request({
+    url: settingRole.replace('/:id', '')+"/perm",
+    method: 'get',
+    data: params,
+  })
+}
+
+export async function statusPerm (params) {
+  return request({
+    url: settingRole.replace('/:id', '')+"/perm/status",
+    method: 'post',
+    data: params,
+  })
+}
+

@@ -1,5 +1,5 @@
 import modelExtend from 'dva-model-extend'
-import {query, updateRole,deleteRole} from '../../services/setting/settingRole'
+import {query, updateRole, deleteRole, queryPerm, statusPerm} from '../../services/setting/settingRole'
 import {pageModel} from '../common'
 import {message} from 'antd'
 
@@ -9,6 +9,7 @@ export default modelExtend(pageModel, {
   state: {
     currentItem: {},
     modalVisible: false,
+    modalVisiblePerm: false,
     modalType: 'create',
   },
 
@@ -34,6 +35,25 @@ export default modelExtend(pageModel, {
           payload: {
             list: data.data,
             pagination: {
+              current: Number(payload.page) || 1,
+              pageSize: Number(payload.pageSize) || 10,
+              total: data.total,
+            },
+          },
+        })
+      } else {
+        throw data
+      }
+    },
+    * queryPerm({payload = {}}, {call, put}) {
+      const data = yield call(queryPerm, payload)
+      if (data.success) {
+        yield put({
+          type: 'showModalPerm',
+          payload: {
+            listPerm: data.data,
+            level: payload.level,
+            paginationPerm: {
               current: Number(payload.page) || 1,
               pageSize: Number(payload.pageSize) || 10,
               total: data.total,
@@ -74,6 +94,20 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
+    * statusPerm({payload}, {call, put}) {
+      const data = yield call(statusPerm, payload)
+      if (data.success) {
+        message.success(data.message)
+        yield put({
+          type: 'queryPerm',
+          payload: {
+            level: payload.level
+          }
+        })
+      } else {
+        throw data
+      }
+    },
   },
   reducers: {
 
@@ -83,6 +117,14 @@ export default modelExtend(pageModel, {
 
     hideModal(state) {
       return {...state, modalVisible: false}
+    },
+
+    showModalPerm(state, {payload}) {
+      return {...state, ...payload, modalVisiblePerm: true}
+    },
+
+    hideModalPerm(state) {
+      return {...state, modalVisiblePerm: false}
     },
 
   },

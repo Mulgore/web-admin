@@ -2,7 +2,7 @@ import React from 'react'
 import {Table, Button} from 'antd'
 import styles from './List.less'
 
-const List = ({onEditView, onDeleteView, ...tableProps}) => {
+const List = ({onEditView, onDeleteView, onPermList, ...tableProps}) => {
   const columns = [
     {
       title: '角色名称',
@@ -18,6 +18,7 @@ const List = ({onEditView, onDeleteView, ...tableProps}) => {
       render: (text, record) => {
         return <div>
           <Button icon="edit" type="primary" onClick={e => onEditView(record)}>编辑</Button>
+          <Button icon="bars" type="primary" onClick={e => onPermList(record)}>权限列表</Button>
           <Button icon="delete" type="primary" onClick={e => onDeleteView(record)}>删除</Button>
         </div>
       }
