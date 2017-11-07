@@ -158,7 +158,6 @@ export default modelExtend(pageModel, {
       if (data.success) {
         message.success(data.message)
         yield put({type: 'hideModalAddChild'})
-        console.log(payload.pid)
         yield put({
           type: 'queryChild',
           payload: {id: payload.pid}
@@ -172,6 +171,18 @@ export default modelExtend(pageModel, {
       if (data.success) {
         message.success(data.message)
         yield put({type: 'query'})
+      } else {
+        throw data
+      }
+    },
+    * deleteChildPerm({payload}, {call, put}) {
+      const data = yield call(deletePer, {id: payload.id})
+      if (data.success) {
+        message.success(data.message)
+        yield put({
+          type: 'queryChild',
+          payload: {id: payload.pid}
+        })
       } else {
         throw data
       }
@@ -211,38 +222,6 @@ export default modelExtend(pageModel, {
 
     hideModalAddChild(state) {
       return {...state, modalVisibleAddChild: false}
-    },
-
-    showModalRate(state, {payload}) {
-      return {...state, currentItem: payload, modalVisibleRate: true}
-    },
-
-    hideModalRate(state) {
-      return {...state, modalVisibleRate: false}
-    },
-
-    showModalProfit(state, {payload}) {
-      return {...state, currentItem: payload, modalVisibleProfit: true}
-    },
-
-    hideModalProfit(state) {
-      return {...state, modalVisibleProfit: false}
-    },
-
-    showModalProfitWithdraw(state, {payload}) {
-      return {...state, ...payload, modalVisibleProfitWithdraw: true}
-    },
-
-    hideModalProfitWithdraw(state) {
-      return {...state, modalVisibleProfitWithdraw: false}
-    },
-
-    showModalProfitRecord(state, {payload}) {
-      return {...state, ...payload, modalVisibleProfitRecord: true}
-    },
-
-    hideModalProfitRecord(state) {
-      return {...state, modalVisibleProfitRecord: false}
     },
 
   },

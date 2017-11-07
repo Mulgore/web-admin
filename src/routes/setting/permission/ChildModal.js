@@ -9,6 +9,7 @@ const modal = ({
                  listProps = {},
                   onRemoveChild,
                   onEditChild,
+                 onDeleteView,
                   onStartChild,
                  ...modalProps
                }) => {
@@ -21,6 +22,14 @@ const modal = ({
       title: '确定禁用权限菜单吗 ?',
       onOk() {
         onRemoveChild(item)
+      },
+    })
+  }
+  const onDelete = (item)=>{
+    confirm({
+      title: '确定删除权限菜单吗 ?',
+      onOk() {
+        onDeleteView(item)
       },
     })
   }
@@ -58,9 +67,9 @@ const modal = ({
       title: '操作',
       render: (text, record) => {
         if (record.state == 0) {
-          return <Button icon="check" type="primary" onClick={e =>start(record)}>启用</Button>
+          return <div><Button icon="check" type="primary" onClick={e =>start(record)}>启用</Button><Button icon="delete" type="primary" onClick={e =>onDelete(record)}>删除</Button></div>
         } else if (record.state == 1) {
-          return <div><Button icon="edit" onClick={e => edit(record)}>编辑</Button><Button icon="close" onClick={e => remove(record)}>禁用</Button></div>
+          return <div><Button icon="edit" onClick={e => edit(record)}>编辑</Button><Button icon="close" onClick={e => remove(record)}>禁用</Button><Button icon="delete" type="primary" onClick={e =>onDelete(record)}>删除</Button></div>
         }
       }
     },

@@ -61,22 +61,6 @@ const Index = ({settingPermission, dispatch, loading, location}) => {
         },
       })
     },
-    onProfitRecord(item) {
-      dispatch({
-        type: 'settingPermission/queryProfitRecord',
-        payload: {
-          uid: item.uid,
-        },
-      })
-    },
-    onProfitWithdraw(item) {
-      dispatch({
-        type: 'settingPermission/queryProfitWithdraw',
-        payload: {
-          uid: item.uid,
-        },
-      })
-    },
   }
 
   const modalPropsChild = {
@@ -121,6 +105,12 @@ const Index = ({settingPermission, dispatch, loading, location}) => {
           state: 1,
           pid: pid,
         },
+      })
+    },
+    onDeleteView(item) {
+      dispatch({
+        type: 'settingPermission/deleteChildPerm',
+        payload: item,
       })
     },
     onRemoveChild(item) {
