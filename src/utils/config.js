@@ -21,7 +21,7 @@ module.exports = {
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
     menus: `${APIV1}/menus`,
-    settingRole: `${APIV1}/settingRole`,
+    settingRole: `${APIV1}/settingRole/:id`,
     settingPermission: `${APIV1}/settingPermission/:id`,
     merchantManage: `${APIV1}/merchantManage/:id`,
     userManage: `${APIV1}/userManage/:id`,

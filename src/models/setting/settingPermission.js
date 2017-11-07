@@ -5,11 +5,6 @@ import {
   deletePer,
   updatePerm,
   stateChild,
-  removeChild,
-  addChildPerm,
-  queryProfit,
-  queryProfitRecord,
-  queryProfitWithdraw,
 } from '../../services/setting/settingPermission'
 import {pageModel} from '../common'
 import {message} from 'antd'
@@ -23,10 +18,6 @@ export default modelExtend(pageModel, {
     modalVisibleChild: false,
     modalVisibleEdit: false,
     modalVisibleAddChild: false,
-    modalVisibleRate: false,
-    modalVisibleProfit: false,
-    modalVisibleProfitRecord: false,
-    modalVisibleProfitWithdraw: false,
     modalType: 'create',
   },
 
@@ -41,22 +32,6 @@ export default modelExtend(pageModel, {
             }
           })
         }
-        // if (location.pathname === '/settingPermission/profitRecord') {
-        //   dispatch({
-        //     type: 'queryProfitWithdraw',
-        //     payload: {
-        //       ...location.query,
-        //     }
-        //   })
-        // }
-        // if (location.pathname === '/settingPermission/profitRecord') {
-        //   dispatch({
-        //     type: 'query',
-        //     payload: {
-        //       ...location.query,
-        //     }
-        //   })
-        // }
       })
     },
   },

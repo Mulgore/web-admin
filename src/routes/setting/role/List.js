@@ -1,27 +1,26 @@
 import React from 'react'
-import {Table, Icon} from 'antd'
+import {Table, Button} from 'antd'
 import styles from './List.less'
-import {globalPayType, globalSettleType, feeRateFormat} from '../../../utils'
-const status = (key) => {
-  switch (key) {
-    case 1:
-      return <Icon style={{color: 'blue'}} type="check"/>
-    case 0:
-      return <Icon style={{color: 'red'}} type="close"/>
-  }
-}
 
-const List = ({...tableProps}) => {
+const List = ({onEditView, onDeleteView, ...tableProps}) => {
   const columns = [
     {
-      title: '等级',
+      title: '角色名称',
       dataIndex: 'name',
     }, {
-      title: '级别',
+      title: '角色级别',
       dataIndex: 'sort',
     }, {
       title: '备注',
       dataIndex: 'description',
+    }, {
+      title: '操作',
+      render: (text, record) => {
+        return <div>
+          <Button icon="edit" type="primary" onClick={e => onEditView(record)}>编辑</Button>
+          <Button icon="delete" type="primary" onClick={e => onDeleteView(record)}>删除</Button>
+        </div>
+      }
     },
   ]
 
